@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "version": "0.2.0",
-    "updated": "2026-09-05",
+    "version": "0.2.3",
+    "updated": "2026-09-10",
     "schema_version": 2,
     "scope": "角色映射、身份關係、操作限制；不含外觀 skeleton。",
     "mapping_verification": "沿用原版 53 項，未重新查證全部 tag。",
@@ -305,22 +305,26 @@
     "開拓者(記憶)星": {
       "character_tag": "stelle (honkai: star rail)",
       "series_tag": "honkai: star rail",
-      "identity_id": "char_200c73158105"
+      "identity_id": "char_200c73158105",
+      "mapping_note": "此表的星之路徑變體沿用 stelle tag；使用者指定的變體名稱仍是需求，缺必要服裝資料時按 D02 處理，不猜服裝。"
     },
     "開拓者(存護)星": {
       "character_tag": "stelle (honkai: star rail)",
       "series_tag": "honkai: star rail",
-      "identity_id": "char_200c73158105"
+      "identity_id": "char_200c73158105",
+      "mapping_note": "此表的星之路徑變體沿用 stelle tag；使用者指定的變體名稱仍是需求，缺必要服裝資料時按 D02 處理，不猜服裝。"
     },
     "開拓者(毀滅)星": {
       "character_tag": "stelle (honkai: star rail)",
       "series_tag": "honkai: star rail",
-      "identity_id": "char_200c73158105"
+      "identity_id": "char_200c73158105",
+      "mapping_note": "此表的星之路徑變體沿用 stelle tag；使用者指定的變體名稱仍是需求，缺必要服裝資料時按 D02 處理，不猜服裝。"
     },
     "開拓者(歡愉)星": {
       "character_tag": "stelle (honkai: star rail)",
       "series_tag": "honkai: star rail",
-      "identity_id": "char_200c73158105"
+      "identity_id": "char_200c73158105",
+      "mapping_note": "此表的星之路徑變體沿用 stelle tag；使用者指定的變體名稱仍是需求，缺必要服裝資料時按 D02 處理，不猜服裝。"
     },
     "Saber": {
       "character_tag": "artoria pendragon (fate)",
@@ -399,4 +403,3 @@
   },
   "behavior_source": "directing.md D02、D03"
 }
-

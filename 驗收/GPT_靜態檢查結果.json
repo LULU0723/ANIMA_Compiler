@@ -1,157 +1,159 @@
 {
-  "checked_at": "2026-09-10T06:45:45.822Z",
-  "scope": "結構、資料保留、衍生檔與本機來源一致性；不代表 LLM 行為或 GPU 成像通過。",
-  "passed": 28,
+  "checked_at": "2026-09-10T07:25:11.876Z",
+  "version": "0.2.3",
+  "scope": "專案資料及結構；不代表LLM或成圖通過",
+  "passed": 27,
+  "failed": 0,
+  "skipped": 1,
   "total": 28,
   "results": [
     {
-      "name": "完整載入版與來源逐字一致",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "兩份 JSON 版本一致",
-      "pass": true,
+      "name": "角色與管線版本符合本次修改範圍",
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "53 項映射保留",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "原角色與系列 tag 未改",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "每項有身份與非空 tag",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "44 個身份未意外合併",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "身份限制無懸空引用",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "三月七變體共用身份限制且保留變體 tag",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "正規化後無跨身份碰撞",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "全形巡獵名稱可命中",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "大黑塔與黑天鵝未合併",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "watch 四項均不捏造原因",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "固定 prefix 未改",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "固定負向未改",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "prefix 有且只有一個 rating 槽",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "rating 模式資料完整",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "非成人模式不常駐 adult",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "CLIP→LoRA→正負編碼鏈有快照支持",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "主模型與 LoRA 未改",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "尺寸及取樣參數未改",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "快照負向依詞序與契約相符",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "FaceDetailer 狀態一致",
-      "pass": true,
-      "detail": ""
-    },
-    {
-      "name": "完整載入版排除舊提示快照與維護歷史",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "D01–D08 各有唯一主章節",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "測試 ID 唯一且有輸入與判準",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "模型紀錄狀態有結果支持",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
       "name": "封存原檔雜湊一致",
-      "pass": true,
+      "status": "passed",
       "detail": ""
     },
     {
-      "name": "原始來源未修改（可存取時）",
-      "pass": true,
-      "detail": "來源不在此電腦，只驗封存"
+      "name": "原始來源未修改",
+      "status": "skipped",
+      "detail": "來源不在此電腦；僅上方封存雜湊檢查已執行"
+    },
+    {
+      "name": "冒煙涵蓋全部critical",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "冒煙ID有效且唯一",
+      "status": "passed",
+      "detail": ""
     }
   ],
   "source_hashes": {
-    "00_GPT_系統提示.md": "808ebf7953700e365851d95d2814dc1926a18a1328ac25318d98bd84c03dde7c",
-    "directing.md": "0e9ce2f042ee8ad1ce3cec447fd4617d9fd1c177d699ebbc77d00e2f7c122d5b",
-    "characters.json": "025559fb07bafd128af39d811835c14025d13bb39d02962846398872bc0742f6",
+    "00_GPT_系統提示.md": "170eff5e6b9e25b347c99f2552ad4e33d302b5c257c8ca3fae1ec9a5b29576d0",
+    "directing.md": "fee0c32bad9dddb6a9e5bba8abf9f125cb264d5b025c161174dd90da075774a2",
+    "characters.json": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82",
     "pipeline.json": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
   },
-  "runtime_sha256": "c5c663ea18230627f32a298dd20e3aa868139a926740dea070d6def0168d64cc",
-  "runtime_characters": 22224,
+  "project_sha256": "7babe4cfe316bf4bc2d4cba3b8a5faa7a87f08f3bbf3506c222ed4fd08eb73fd",
   "model_execution_status": "NOT_RUN"
 }

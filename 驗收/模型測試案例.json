@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.3",
   "model_execution_status": "NOT_RUN",
-  "method": "每案新對話載入同一完整載入版；turns 在同一案內按順序送出，收錄每輪完整回覆。各模型建議三次重跑；不要將測試預期先提供給受測模型。",
+  "method": "每案在新的專案對話載入對應00入口及 directing.md、characters.json、pipeline.json；turns依序送出。不要提供預期答案給受測模型。收錄完整回覆與工具活動；各模型建議三次重跑。",
   "cases": [
     {
       "id": "T01",
@@ -814,8 +814,104 @@
         "新增道具0，明示排除優先於額度"
       ],
       "severity": "required"
+    },
+    {
+      "id": "T51",
+      "name": "豐富覆寫零額度",
+      "turns": [
+        "/豐富 卡芙卡，原裝，發呆"
+      ],
+      "rules": [
+        "D05"
+      ],
+      "assertions": [
+        "新增額度上限3而非0，不要求用滿",
+        "不因豐富而猜外觀或背景事故"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T52",
+      "name": "明示上限優先",
+      "turns": [
+        "/豐富 成年原創女性，花園，最多加一件道具"
+      ],
+      "rules": [
+        "D05"
+      ],
+      "assertions": [
+        "新增最多1件，不相加成4件"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T53",
+      "name": "指令格式例外",
+      "turns": [
+        "/編譯卡芙卡"
+      ],
+      "rules": [
+        "D01",
+        "D07"
+      ],
+      "assertions": [
+        "僅提醒指令後加空白，不附編譯結果"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T54",
+      "name": "入口來源缺失",
+      "turns": [
+        "請修改00入口的完成條件；目前只提供專案四檔，沒有維護資料"
+      ],
+      "rules": [
+        "C01"
+      ],
+      "assertions": [
+        "提出具體建議並請提供來源，不直接改00或假稱已重建"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T55",
+      "name": "查證限制可見",
+      "turns": [
+        "請說明角色表中的tag是否都完成逐筆人工語義審核"
+      ],
+      "rules": [
+        "C03"
+      ],
+      "assertions": [
+        "依_meta說明批次命中不等於逐筆語義人工審核"
+      ],
+      "severity": "required"
     }
   ],
-  "adapter_version": "0.2.2",
-  "behavior_version": "0.2.2"
+  "adapter_version": "0.2.3",
+  "behavior_version": "0.2.3",
+  "smoke_case_ids": [
+    "T21",
+    "T22",
+    "T23",
+    "T24",
+    "T37",
+    "T38",
+    "T39",
+    "T40",
+    "T41",
+    "T42",
+    "T01",
+    "T07",
+    "T43",
+    "T45",
+    "T46",
+    "T48",
+    "T49",
+    "T51",
+    "T52",
+    "T53",
+    "T54",
+    "T55"
+  ]
 }

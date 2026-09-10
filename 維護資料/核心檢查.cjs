@@ -8,27 +8,13 @@ const checkOnly=process.argv.includes('--check');
 const platform=process.argv.find(x=>x.startsWith('--platform='))?.split('=')[1];
 if(!['GPT','Claude'].includes(platform)) throw new Error('Use --platform=GPT or --platform=Claude');
 const entry='00_'+platform+'_系統提示.md';
-const runtime='01_'+platform+'_完整載入版.md';
 const names=[entry,'directing.md','characters.json','pipeline.json'];
 const texts=Object.fromEntries(names.map(n=>[n,read(n)]));
 const c=json('characters.json'),p=json('pipeline.json');
-const runtimeContract={compiler_outputs:p.prompt_contract.compiler_outputs,positive_prefix:p.prompt_contract.positive_prefix,rating_slot:p.prompt_contract.rating_slot,rating_by_mode:p.prompt_contract.rating_by_mode};
-const runtimeChars={normalization:c.normalization,character_name_zh_to_tag:c.character_name_zh_to_tag,identity_policies:c.identity_policies,age_cues:c.age_cues};
-const examplePrefix=p.prompt_contract.positive_prefix.replace('{rating}','safe');
-const exampleIdentity=c.character_name_zh_to_tag['卡芙卡'];
-const exampleBody=examplePrefix+' '+exampleIdentity.character_tag+', '+exampleIdentity.series_tag+', 1girl, simple white background, soft lighting, sitting, looking away, from side, upper body';
-const exampleB=examplePrefix+' '+exampleIdentity.character_tag+', '+exampleIdentity.series_tag+', 1girl, simple white background, soft lighting, standing, looking away, from above, cowboy shot';
-const formatExamples='\n<ANIMA_FORMAT_EXAMPLES>\n僅示範輸出格式，不要求其他題目沿用姿勢、光線或裁切。\n\n輸入：卡芙卡，原裝，白色背景\n輸出：\n```\n'+exampleBody+'\n```\n\n輸入：/比較 卡芙卡，原裝，白色背景\n輸出：\nA：坐姿、側面半身\n```\n'+exampleBody+'\n```\nB：站姿、俯視大腿附近取景\n```\n'+exampleB+'\n```\n</ANIMA_FORMAT_EXAMPLES>\n';
-const generated='# ANIMA Compiler 入口 v0.2.2 — '+platform+' 完整載入版（行為規格 v0.2.2；角色與管線 v0.2.0）\n\n'
- +'本檔由四份來源自動產生，只選一種載入方式，不與原版或分檔版混載。修改來源後重建，不手改本檔。此包尚未通過兩個目標模型的實測驗收。\n\n'
- +texts[entry]+'\n\n<ANIMA_BEHAVIOR>\n'+texts['directing.md']+'\n</ANIMA_BEHAVIOR>\n\n'
- +'<ANIMA_PROMPT_CONTRACT>\n'+JSON.stringify(runtimeContract,null,2)+'\n</ANIMA_PROMPT_CONTRACT>\n\n'
- +'<ANIMA_CHARACTERS>\n'+JSON.stringify(runtimeChars,null,2)+'\n</ANIMA_CHARACTERS>\n'+formatExamples;
-if(!checkOnly) fs.writeFileSync(path.join(root,runtime),generated,'utf8');
 const results=[];
-function check(name,ok,detail=''){results.push({name,pass:!!ok,detail});}
-check('完整載入版與來源逐字一致',read(runtime)===generated);
-check('兩份 JSON 版本一致',c._meta.version==='0.2.0'&&p._meta.version==='0.2.0');
+function check(name,ok,detail=''){results.push({name,status:ok?'passed':'failed',detail});}
+function skip(name,detail){results.push({name,status:'skipped',detail});}
+check('角色與管線版本符合本次修改範圍',c._meta.version==='0.2.3'&&p._meta.version==='0.2.0');
 check('53 項映射保留',Object.keys(c.character_name_zh_to_tag).length===53);
 const old=json('維護資料/原版封存/characters.json').character_name_zh_to_tag;
 check('原角色與系列 tag 未改',Object.entries(old).every(([n,e])=>c.character_name_zh_to_tag[n]?.character_tag===e.character_tag&&c.character_name_zh_to_tag[n]?.series_tag===e.series_tag));
@@ -61,7 +47,6 @@ check('尺寸及取樣參數未改',p.snapshot.latent.width===oldp.latent.width&
 const tok=s=>s.split(',').map(x=>x.trim()).filter(Boolean);
 check('快照負向依詞序與契約相符',JSON.stringify(tok(p.snapshot.prompts.negative_node15))===JSON.stringify(tok(p.prompt_contract.negative.target)));
 check('FaceDetailer 狀態一致',p.snapshot.main_face_detailer.active===(p.snapshot.main_face_detailer.mode===0));
-check('完整載入版排除舊提示快照與維護歷史',!generated.includes(p.snapshot.prompts.positive_node14)&&!generated.includes('_alternate_workflows')&&!generated.includes('若 Ultraman artifact 再次出現'));
 check('D01–D08 各有唯一主章節',Array.from({length:8},(_,i)=>'D0'+(i+1)).every(id=>(texts['directing.md'].match(new RegExp('^## '+id+'｜','gm'))||[]).length===1));
 const cases=json('驗收/模型測試案例.json');
 check('測試 ID 唯一且有輸入與判準',new Set(cases.cases.map(x=>x.id)).size===cases.cases.length&&cases.cases.every(x=>x.turns.length&&x.assertions.length));
@@ -70,8 +55,11 @@ check('模型紀錄狀態有結果支持',modelLog.runs.length===0?modelLog.targ
 const sources=json('維護資料/source_manifest.json');
 check('封存原檔雜湊一致',sources.files.every(x=>sha(fs.readFileSync(path.join(root,'維護資料','原版封存',x.name)))===x.sha256));
 const originalAvailable=fs.existsSync(sources.source);
-check('原始來源未修改（可存取時）',!originalAvailable||sources.files.every(x=>sha(fs.readFileSync(path.join(sources.source,x.name)))===x.sha256),originalAvailable?'本機已確認':'來源不在此電腦，只驗封存');
-const out={checked_at:new Date().toISOString(),scope:'結構、資料保留、衍生檔與本機來源一致性；不代表 LLM 行為或 GPU 成像通過。',passed:results.filter(r=>r.pass).length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),runtime_sha256:sha(generated),runtime_characters:generated.length,model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
+if(originalAvailable) check('原始來源未修改',sources.files.every(x=>sha(fs.readFileSync(path.join(sources.source,x.name)))===x.sha256),'外部來源可存取');
+else skip('原始來源未修改','來源不在此電腦；僅上方封存雜湊檢查已執行');
+check('冒煙涵蓋全部critical',cases.cases.filter(x=>x.severity==='critical').every(x=>cases.smoke_case_ids.includes(x.id)));
+check('冒煙ID有效且唯一',new Set(cases.smoke_case_ids).size===cases.smoke_case_ids.length&&cases.smoke_case_ids.every(id=>cases.cases.some(x=>x.id===id)));
+const out={checked_at:new Date().toISOString(),version:'0.2.3',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
 fs.writeFileSync(path.join(root,'驗收',platform+'_靜態檢查結果.json'),JSON.stringify(out,null,2)+'\n','utf8');
-console.log(JSON.stringify({platform,passed:out.passed,total:out.total,runtime_characters:out.runtime_characters,model_execution_status:out.model_execution_status}));
-if(results.some(r=>!r.pass)) process.exitCode=1;
+console.log(JSON.stringify({platform,passed:out.passed,failed:out.failed,skipped:out.skipped,total:out.total,model_execution_status:out.model_execution_status}));
+if(out.failed)process.exitCode=1;

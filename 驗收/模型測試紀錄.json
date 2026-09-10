@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.3",
   "targets": [
     {
       "requested_model": "GPT-5.6",
@@ -17,13 +17,14 @@
     "case_id": "T01",
     "model_id": "填介面／API實際模型名",
     "run_number": 1,
-    "runtime_sha256": "填靜態檢查結果的runtime_sha256",
     "platform": "填ChatGPT／Claude／API",
     "settings": "填實際設定，不猜",
     "timestamp": "填測試時間",
     "responses": [],
     "assertion_results": [],
     "reviewer": "填實際評核者",
-    "pass": null
-  }
+    "pass": null,
+    "project_sha256": "填該平台靜態檢查結果的 project_sha256"
+  },
+  "version_scope": "此紀錄模板／案例套件版本；runs為空表示所有版本均無本檔記錄的模型實跑"
 }

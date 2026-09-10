@@ -1,58 +1,60 @@
 {
-  "checked_at": "2026-09-10T06:45:45.891Z",
-  "adapter_version": "0.2.2",
-  "behavior_version": "0.2.2",
-  "data_version": "0.2.0",
-  "passed": 12,
-  "total": 12,
+  "checked_at": "2026-09-10T07:25:12.000Z",
+  "version": "0.2.3",
+  "passed": 9,
+  "failed": 0,
+  "skipped": 1,
+  "total": 10,
   "results": [
     {
-      "name": "GPT 入口與共用來源一致",
-      "pass": true
+      "name": "GPT 入口與來源一致",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "GPT 文字交付與必要唯讀工具邊界",
-      "pass": true
+      "name": "GPT 文字交付及來源維護邊界",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "GPT 核心及完整載入版驗證",
-      "pass": true
+      "name": "GPT 專案核心檢查",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "Claude 入口與共用來源一致",
-      "pass": true
+      "name": "Claude 入口與來源一致",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "Claude 文字交付與必要唯讀工具邊界",
-      "pass": true
+      "name": "Claude 文字交付及來源維護邊界",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "Claude 核心及完整載入版驗證",
-      "pass": true
+      "name": "Claude 專案核心檢查",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "ANIMA_BEHAVIOR 跨平台逐字一致",
-      "pass": true
+      "name": "55案及統一說明同步",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "ANIMA_PROMPT_CONTRACT 跨平台逐字一致",
-      "pass": true
+      "name": "正式來源與v0.2.3清單一致",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "ANIMA_CHARACTERS 跨平台逐字一致",
-      "pass": true
+      "name": "證據檔納入清單",
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "目前正式來源與 v0.2.2 清單一致",
-      "pass": true
-    },
-    {
-      "name": "來源包未改（可存取時）",
-      "pass": true
-    },
-    {
-      "name": "50 個待測案例齊全",
-      "pass": true
+      "name": "外部來源包核對",
+      "status": "skipped",
+      "detail": "未設定或無法存取外部來源；未執行，不計為通過"
     }
   ],
   "model_execution_status": "NOT_RUN"
