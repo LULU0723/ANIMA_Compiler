@@ -1,0 +1,232 @@
+{
+  "_meta": {
+    "version": "0.1.3",
+    "created": "2026-08-30",
+    "updated": "2026-08-30",
+    "source_of_truth": "E:\\user\\default\\workflows\\01_主力_AnimaNova\\Anima_ILXL_2026_CleanPipeline_v1.json",
+    "read_method": "直接解析 workflow JSON，只取 mode==0 (ACTIVE) 的節點",
+    "principle": "本檔只記實機參數。不憑印象填寫。實機改了就要回來改這裡，否則 _pending_sync 會累積成假資料。"
+  },
+
+  "architecture": {
+    "stages": 1,
+    "note": "單階段。Stage 2 (Nova Anime XL / Illustrious) 已停用但節點仍留在 workflow 檔案裡，見 _disabled_branches。",
+    "active_chain": "UNETLoader(10) → ZmlPowerLoraLoader(38) → KSampler(Efficient)(31) → VAEDecode(19) → PreviewImage(20)",
+    "conditioning_chain": "CLIPLoader(12) → CLIPTextEncode(14 正向) / CLIPTextEncode(15 負向) → KSampler(31)",
+    "latent_chain": "EmptyLatentImage(18) → KSampler(31)"
+  },
+
+  "models": {
+    "unet": {
+      "node": 10,
+      "loader": "UNETLoader",
+      "unet_name": "miaomiaoHarem_anima14.safetensors",
+      "weight_dtype": "default"
+    },
+    "text_encoder": {
+      "node": 12,
+      "loader": "CLIPLoader",
+      "clip_name": "qwen_3_06b_base.safetensors",
+      "type": "stable_diffusion",
+      "device": "default",
+      "_note": "type 設 stable_diffusion 看似不對，但實際無影響：comfy/sd.py:1927 的分派是依權重檔偵測出的 te_model (QWEN3_06B)，不是依這個下拉選單。偵測後自動使用 AnimaTokenizer + anima TE。已查證，勿亂改。"
+    },
+    "vae": {
+      "node": 13,
+      "loader": "VAELoader",
+      "vae_name": "qwen_image_vae.safetensors"
+    }
+  },
+
+  "loras": {
+    "node": 38,
+    "loader": "ZmlPowerLoraLoader",
+    "folder": "ANIMA 固定畫風",
+    "_note": "掛在 denoise 1.0 的唯一階段，會影響構圖不只風格。",
+    "entries": [
+      {
+        "lora_name": "anima_context_detailer_base10.safetensors",
+        "weight": 0.5,
+        "clip_weight": 1.0,
+        "enabled": true
+      },
+      {
+        "lora_name": "(ANIMA)_alTER KYON ai_222_epoch_10.safetensors",
+        "weight": 1.0,
+        "clip_weight": 1.0,
+        "enabled": true
+      }
+    ]
+  },
+
+  "sampler": {
+    "node": 31,
+    "type": "KSampler (Efficient)",
+    "seed": -1,
+    "seed_mode": "randomize",
+    "steps": 30,
+    "cfg": 5.0,
+    "sampler_name": "euler_ancestral",
+    "scheduler": "normal",
+    "denoise": 1.0,
+    "preview_method": "latent2rgb",
+    "vae_decode": "true",
+    "_note": "節點本身的 vae_decode 為 true，但其 IMAGE 輸出未接線；實際解碼走獨立的 VAEDecode(19)。"
+  },
+
+  "latent": {
+    "node": 18,
+    "loader": "EmptyLatentImage",
+    "width": 920,
+    "height": 1536,
+    "batch_size": 1
+  },
+
+  "model_sampling": {
+    "shift": 3.0,
+    "multiplier": 1.0,
+    "_source": "comfy/supported_models.py:1131 class Anima → sampling_settings",
+    "_note": "ComfyUI 對 Anima 架構的內建預設值，workflow 裡不需要也沒有 ModelSampling 節點。官方 MiaoMiao Harem v1.4 範例的 Shift: 3 與此一致，無缺口。Anima 在 ComfyUI 是獨立架構 (comfy/ldm/anima/)，不是 Qwen-Image (那個預設是 1.15，與本專案無關)。"
+  },
+
+  "prompt_contract": {
+    "compiler_outputs": ["positive"],
+    "_note": "編譯器只產生正向提示。負向由本檔 negative 固定管理，不隨每次生成變動。",
+
+    "positive_prefix": "best quality, score_7, score_9, {rating}, very aesthetic, ultra detailed, high contrast,",
+    "rating_slot": {
+      "default": "safe",
+      "allowed": ["safe", "sensitive", "explicit"],
+      "_note": "每次只輸出一個分級標籤。官方範例 prefix 同時放 sensitive 與 explicit（互相矛盾，等於分級訊號互沖），本專案改為單一標籤。safe 為預設；explicit 只在 /成人 模式使用。平台政策優先級高於本設定。"
+    },
+    "content_modes": {
+      "safe": { "rating": "safe", "activation": "default", "required_tags": [] },
+      "sensitive": { "rating": "sensitive", "activation": "成年角色的性感、性暗示、事前／事後氛圍、泳裝、內衣、濕身等非露骨內容，或使用者明確指定", "required_tags": [] },
+      "adult": {
+        "command": "/成人",
+        "alias": "/nsfw",
+        "rating": "explicit",
+        "activation": "使用者明確輸入 /成人（或 /nsfw）；畫面中所有角色必須為成年人",
+        "required_tags": ["adult"],
+        "_required_note": "adult 只在本模式強制加入。其餘模式不放——它疑似影響身高與頭身比，見 observations.md 4-4。年齡下限由 characters.json → minor_guard 的幼態詞封鎖負責，不靠正向錨點。"
+      },
+      "_note": "本專案唯一行為依平台而異的功能。規格允許成人切換，但 Claude／GPT 所在平台政策優先；平台不允許時簡短說明並提供可行替代方向，不得假裝切換成功後又暗中套用 safe 規則。在 Claude 端會穩定走平台政策分支——這是預期行為，不是檔案故障。",
+      "_hard_lock": "幼態防護不受本設定影響。見 directing.md 5-4 與 characters.json → minor_guard。adult 只是生成 tag，不能覆蓋已知的未成年設定。"
+    },
+    "prefix_decisions": {
+      "fair_skin": "排除。官方 prefix 有，但會鎖膚色，深膚角色會打架。使用者已同意不放。",
+      "ultra_detailed": "保留（照官方）。使用者先前實測認為會造成 Ultraman 式 artifact，2026-08-30 決定改照官方範例，該實測結論已改標為『待重驗』，見 observations.md。",
+      "high_contrast": "保留（照官方）。使用者先前實測認為會與明示柔光/低對比指令打架，同上，已改標為『待重驗』。"
+    },
+
+    "negative": {
+      "base": "worst quality, low quality, score_1, score_2, score_3, artist name",
+      "hands_feet_guard": "bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "target": "worst quality, low quality, score_1, score_2, score_3, artist name, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "_source": "base 來自 MiaoMiao Harem v1.4 官方三張範例；hands_feet_guard 為使用者 2026-08-30 決定加入的手指／腳趾保護詞。8 個詞全部保留。真標籤與自然語言負面詞的強度差異目前是[觀察中]假設，不是事實，不得據以做選詞優先排序——見 observations.md 4-5。",
+      "live_value_node15": "worst quality, low quality, score_1, score_2, score_3, artist name, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "_status": "已與實機同步（2026-08-30 直讀 workflow node 15 驗證）。"
+    }
+  },
+
+  "_pending_sync": [
+    {
+      "id": "PS-001",
+      "item": "負向提示改為官方 6 項基底 + 8 項手腳保護",
+      "file_value": "worst quality, low quality, score_1, score_2, score_3, artist name, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "live_value": "node 15 目前為 20 項（含 bad anatomy 系列 / text / watermark / cropped / out of frame 等）",
+      "action": "已完成。",
+      "decided_on": "2026-08-30",
+      "verified_on": "2026-08-30",
+      "verification": "直讀實機 workflow（見 _meta.source_of_truth）node 15 (mode 0)，文字與 file_value 完全一致。",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "PS-002",
+      "item": "正向 prefix 加回 ultra detailed / high contrast，並確認 rating 槽",
+      "file_value": "best quality, score_7, score_9, {rating}, very aesthetic, ultra detailed, high contrast,",
+      "live_value": "node 14 已使用新 prefix：best quality, score_7, score_9, safe, very aesthetic, ultra detailed, high contrast",
+      "action": "已完成。編譯器產出的提示詞自帶新 prefix，不需改工作流結構。",
+      "decided_on": "2026-08-30",
+      "verified_on": "2026-08-30",
+      "verification": "直讀實機 workflow node 14 (mode 0) 確認。",
+      "status": "COMPLETE"
+    },
+    {
+      "id": "PS-003",
+      "item": "主鏈沒有 SaveImage，只有 PreviewImage(20)",
+      "file_value": "（未決定）",
+      "live_value": "成品需從 PreviewImage 手動另存",
+      "action": "不需要處理。使用者有其他擴充功能可顯示／取得圖片，不需要 SaveImage 節點。實機維持只有 PreviewImage(20) 是刻意的，不是缺漏。",
+      "decided_on": "2026-08-30",
+      "status": "NOT_NEEDED"
+    }
+  ],
+
+  "_alternate_workflows": {
+    "_note": "非主力、但已在機器上且會實際使用的工作流。主記錄（本檔上半部）仍以 _meta.source_of_truth 為準。列在這裡是為了哪天開了它，本檔不會對不上。",
+
+    "anima_workflows_v8_zh": {
+      "path": "E:\\user\\default\\workflows\\01_主力_AnimaNova\\animaWorkflows_v80\\",
+      "files": ["AnimaBasicV8.json", "AnimaStandardV8.json", "AnimaAdvancedV8.json", "AnimaDetailerV8.json"],
+      "origin": "Civitai 使用者 Legendaer 的 Anima Workflows v8.0；2026-08-30 由 Claude 中文化並把參數換成本機設定。原始英文版在 D:\\下載\\animaWorkflows_v80\\",
+      "manual": "同資料夾 Anima工作流操作手冊.html",
+      "when_to_use": "雙人／多角色（區域提示詞）、ControlNet LLLite、需要四道 ADetailer 時開 AnimaAdvancedV8；日常出圖仍用主記錄的 Anima_ILXL_2026_CleanPipeline_v1.json。",
+
+      "same_as_main": ["UNET miaomiaoHarem_anima14", "CLIP qwen_3_06b_base / stable_diffusion", "VAE qwen_image_vae", "920x1536", "30 steps / cfg 5 / euler_ancestral / normal / denoise 1.0"],
+
+      "differences_from_main": {
+        "sampler_node": "核心 KSampler(27)，不是主力用的 KSampler (Efficient)。",
+        "seed": "獨立 SeedNode(63) 統一供給取樣器與各修飾器；主力是取樣器 widget 上的 -1/randomize。做固定 seed 對照測試時這個比較方便。",
+        "lora_loader": "Lora Loader (LoraManager)(26)，不是 ZmlPowerLoraLoader。**目前為空**——使用前必須自行加入 anima_context_detailer_base10 @0.5 與 (ANIMA)_alTER KYON ai_222_epoch_10 @1.0，否則畫風會與主力不同。",
+        "prompt_path": "提示詞經 ImpactWildcardProcessor(24 正 / 25 負) 中轉再進 CLIPTextEncode(80 正 / 84 負)；主力是直接打進 CLIPTextEncode。",
+        "clip_negpip": "CLIPNegPip(85) **在鏈上且為 ACTIVE**。它 patch CLIP 以支援負權重（如 (tag:-1.0)）。不使用負權重時應為中性，但**未在 Anima 上驗證**——見 observations.md 4-7。這是主力沒有的變數。",
+        "auto_save": "Image Saver Simple(35) 為 ACTIVE，檔名格式 %time_%basemodelname_%seed，**會自動存檔到硬碟**。主力只有 PreviewImage（PS-003 已結案為 NOT_NEEDED）。換用時圖片會開始堆積，但 seed 寫進檔名對 A/B 測試有利。"
+      },
+
+      "optional_groups": {
+        "_note": "以下都預設停用，用 Fast Groups Bypasser (rgthree) 面板開關。串在主鏈中間的用 BYPASS(4) 讓訊號穿透。",
+        "區域提示詞（多角色分區）": "AttentionCouplePPM(20) + 三路 ImageToMask 抽紅/綠/藍色版 + 三段區域提示詞 + SolidMask 底圖。**目前已知最可靠的多角色做法**。需要自備純色遮罩 PNG 放在 E:\\input\\（預設檔名 redgreenregion.png）。每段區域提示詞都必須寫總人數（畫兩人就三段都寫 2girls）。",
+        "ControlNet LLLite（Anima 專用）": "ModelPatchLoader(138) + AnimaLLLiteApply(131) + AIO_Preprocessor(DepthAnythingV2)。模型 anima-lllite-any-test-like-v2.safetensors 已放入 E:\\models\\model_patches\\（2026-08-30）。AnimaLLLiteApply 是 ComfyUI 內建節點。SDXL 的 ControlNet 模型在 Anima 上不能用。",
+        "CFGZeroStar": "CFGZeroStar(74)，CFG 校正，預設 BYPASS。",
+        "四道 ADetailer": "手 → NSFW → 臉 → 眼，循序執行的 FaceDetailerPipe。共用參數在「修飾器共用設定」群組。主力只有一道 FaceDetailer。",
+        "其他": "Hires 放大、Ultimate SD Upscale、去背、色彩匹配、簽名、整組 GLSL 後製濾鏡。"
+      },
+
+      "_compiler_impact": "編譯器的提示詞契約（prefix／負向／語序／構圖流程）與工作流無關，換工作流不需要改 directing.md、characters.json 或系統提示。**唯一例外是區域提示詞**——它需要每區各一段，會動到「一個 code block」的輸出契約。尚未設計。"
+    }
+  },
+
+  "_disabled_branches": {
+    "_note": "以下節點仍存在於 workflow 檔案中，只是被停用。記錄在此，是為了哪天打開時本檔不會對不上。它們不是本專案的編譯目標。ComfyUI 的 mode 常數（取自前端原始碼 ALWAYS=0 / ON_EVENT=1 / NEVER=2 / ON_TRIGGER=3 / BYPASS=4）：**mode 4 = BYPASS，輸入穿透到輸出，鏈路不斷；mode 2 = NEVER(靜音)，節點不執行也不輸出**。本工作流的 Stage-2 串接鏈用 4（要讓 model/latent 穿透），末端分支（FaceDetailer／USDU／Clean Upscale／Legacy）用 2。",
+    "stage2_refine": {
+      "checkpoint": "novaAnimeXL_ilV190.safetensors (node 22)",
+      "lora_loader": "node 23 ZmlPowerLoraLoader（TURISASU_Style_IL @0.6/0.35、alterkyonCIVITAI @0.6/0.35 為 enabled）",
+      "sampler": "node 35 KSampler(Efficient) 30 / cfg 4 / dpmpp_2m / karras / denoise 0.24",
+      "upscale_before": "node 36 ImageScaleBy lanczos 1.25",
+      "negative": "node 27（與 node 15 不同，較長）"
+    },
+    "stage2_legacy_strong": "node 48 / 49 / 50 / 51 — 38 steps / cfg 4.5 / denoise 0.30",
+    "face_detailer": "node 40 (bbox/face_yolov8m.pt) + node 41 FaceDetailer (20 / cfg 4.3 / denoise 0.3) + node 42 預覽 + node 57 存檔",
+    "usdu_detail": "node 43 (RealESRGAN_x4plus_anime_6B) + node 44 UltimateSDUpscale (1.5x / 20 / cfg 4.3 / denoise 0.20 / tile 1024) + node 45 預覽 + node 56 存檔",
+    "clean_upscale": "node 52 + node 53 ImageUpscaleWithModel + node 54 預覽 + node 55 存檔（純放大，不再 diffusion）",
+    "external_tools": "局部重繪走同資料夾 局部重繪_Inpaint_分階段.json；修手走 修手_MeshGraphormer_DepthCN.json"
+  },
+
+  "_official_reference": {
+    "source": "D:\\下載\\MiaoMiao Harem V1.4 範例.docx（官方範例三則）",
+    "model": "MiaoMiao Harem _Anima_v1.4_nn",
+    "params": {
+      "steps": 32,
+      "cfg": "4–5（三則中兩則 4、一則 5）",
+      "sampler": "Euler a",
+      "schedule_type": "Normal",
+      "shift": 3,
+      "width": 920,
+      "height": 1536,
+      "rng": "CPU",
+      "modules": ["qwen_image_vae", "anima_baseV10_txt"]
+    },
+    "_diff_vs_live": "官方 steps 32 / 本機 30；官方 cfg 4–5 / 本機 5。差異小，未列入 _pending_sync。官方為 WebUI (neo-2.26) 環境，Hires 段落 (upscale 1.1 / 4x-UltraSharp / denoise 0.3) 不對應本機 ComfyUI 單階段流程，故不記錄。"
+  }
+}

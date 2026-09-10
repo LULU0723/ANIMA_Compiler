@@ -1,0 +1,402 @@
+{
+  "_meta": {
+    "version": "0.2.0",
+    "updated": "2026-09-05",
+    "schema_version": 2,
+    "scope": "角色映射、身份關係、操作限制；不含外觀 skeleton。",
+    "mapping_verification": "沿用原版 53 項，未重新查證全部 tag。",
+    "provenance": "以下映射沿用自舊專案檔；2026-08-30 已用當日 Danbooru API 批次檢查全部 53 個映射項目。玲可、希露瓦、三月七(巡獵)已修正並加上 verified_on；其餘批次命中不等於逐筆完成角色語義人工審核，發現錯誤時仍應回報。"
+  },
+  "normalization": {
+    "steps": [
+      "Unicode NFKC（全半形正規化）",
+      "英文轉小寫",
+      "底線視為空白",
+      "忽略空白，保留括號、冒號、& 等有意義符號"
+    ],
+    "match": "完整中文鍵或完整 character_tag；不做子字串猜測。",
+    "identity_note": "identity_id 僅為專案內穩定識別碼，不是外部資料庫 ID；相同身份可有不同變體 tag。"
+  },
+  "character_name_zh_to_tag": {
+    "阮梅": {
+      "character_tag": "ruan mei (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_c77f1018b535"
+    },
+    "黑天鵝": {
+      "character_tag": "black swan (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e6ad3cfebc8a"
+    },
+    "黑塔": {
+      "character_tag": "herta (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_f42e74f240b0"
+    },
+    "黑塔人偶": {
+      "character_tag": "herta (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_f42e74f240b0"
+    },
+    "大黑塔": {
+      "character_tag": "the herta (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_f069cd85af71",
+      "mapping_note": "大黑塔 = The Herta。絕不可解析成 black swan。黑塔／黑塔人偶 = herta（人偶本體）；黑天鵝 = black swan。"
+    },
+    "黃泉": {
+      "character_tag": "acheron (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_5c2eb0fbef8e"
+    },
+    "艾絲妲": {
+      "character_tag": "asta (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_81339a6f4204"
+    },
+    "白露": {
+      "character_tag": "bailu (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_9a0798d0e141"
+    },
+    "克拉拉": {
+      "character_tag": "clara (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_a9a20e46c125"
+    },
+    "流螢": {
+      "character_tag": "firefly (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_c53733a3b9ee"
+    },
+    "符玄": {
+      "character_tag": "fu xuan (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_62c183b456c3"
+    },
+    "桂乃芬": {
+      "character_tag": "guinaifen (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e2ae9b8290fc"
+    },
+    "寒鴉": {
+      "character_tag": "hanya (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_ccc92be88221"
+    },
+    "姬子": {
+      "character_tag": "himeko (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e93b4380f9e1"
+    },
+    "虎克": {
+      "character_tag": "hook (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_ac69b8cbb27d"
+    },
+    "翡翠": {
+      "character_tag": "jade (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e991c69f2c70",
+      "watch": {
+        "status": "user_reported_unstable",
+        "cause": "unknown",
+        "note": "使用者回報 tag-only 外觀不穩，可能需要手動補外觀；本次未重新出圖。"
+      }
+    },
+    "鏡流": {
+      "character_tag": "jingliu (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e5d138d0f8af"
+    },
+    "卡芙卡": {
+      "character_tag": "kafka (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_4d17d158f30e"
+    },
+    "靈砂": {
+      "character_tag": "lingsha (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_b8556ac58186",
+      "watch": {
+        "status": "user_reported_unstable",
+        "cause": "unknown",
+        "note": "使用者回報 tag-only 外觀不穩，可能需要手動補外觀；本次未重新出圖。"
+      }
+    },
+    "玲可": {
+      "character_tag": "lynx landau",
+      "series_tag": "honkai: star rail",
+      "verified_on": "2026-08-30",
+      "verified_by": [
+        "user",
+        "codex"
+      ],
+      "verification_method": "使用者自行查證 Danbooru；Codex 回報以 Danbooru API exact-tag lookup 結果一致",
+      "identity_id": "char_dd754af9bec2"
+    },
+    "三月七": {
+      "character_tag": "march 7th (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_53c98bb6f69d"
+    },
+    "娜塔莎": {
+      "character_tag": "natasha (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_b0e5d0c0f71d"
+    },
+    "佩拉": {
+      "character_tag": "pela (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_370bcc2451d8"
+    },
+    "青雀": {
+      "character_tag": "qingque (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_e36e67163d15"
+    },
+    "亂破": {
+      "character_tag": "rappa (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_8e3e8d9ba860"
+    },
+    "知更鳥": {
+      "character_tag": "robin (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_c39746a9d560"
+    },
+    "希兒": {
+      "character_tag": "seele (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_4f38ca31ea90"
+    },
+    "希露瓦": {
+      "character_tag": "serval landau",
+      "series_tag": "honkai: star rail",
+      "verified_on": "2026-08-30",
+      "verified_by": [
+        "user",
+        "codex"
+      ],
+      "verification_method": "使用者自行查證 Danbooru；Codex 回報以 Danbooru API exact-tag lookup 結果一致",
+      "identity_id": "char_3036aefd791e"
+    },
+    "銀狼": {
+      "character_tag": "silver wolf (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_7559d9ca765f"
+    },
+    "花火": {
+      "character_tag": "sparkle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_98307f0e1498"
+    },
+    "素裳": {
+      "character_tag": "sushang (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_111c59b15735"
+    },
+    "雪衣": {
+      "character_tag": "xueyi (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_c8d5608b4ce0"
+    },
+    "雲璃": {
+      "character_tag": "yunli (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_7d5e0625cf86"
+    },
+    "遐蝶": {
+      "character_tag": "castorice (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_33e1efeaf98b"
+    },
+    "緹寶": {
+      "character_tag": "tribbie (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_bb8e27da6a63"
+    },
+    "風堇": {
+      "character_tag": "hyacine (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_a80ef87a507a"
+    },
+    "阿格萊雅": {
+      "character_tag": "aglaea (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_7f65be8f2853"
+    },
+    "托帕": {
+      "character_tag": "topaz (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_9e704f94994e"
+    },
+    "刻律德菈": {
+      "character_tag": "cerydra (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_065ac498556c"
+    },
+    "昔漣": {
+      "character_tag": "cyrene (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_0fb42f9d7a63",
+      "watch": {
+        "status": "user_reported_unstable",
+        "cause": "unknown",
+        "note": "使用者回報 tag-only 外觀不穩，可能需要手動補外觀；本次未重新出圖。"
+      }
+    },
+    "長夜月": {
+      "character_tag": "evernight (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_3b42a31764ac",
+      "watch": {
+        "status": "user_reported_unstable",
+        "cause": "unknown",
+        "note": "使用者回報 tag-only 外觀不穩，可能需要手動補外觀；本次未重新出圖。"
+      }
+    },
+    "海瑟音": {
+      "character_tag": "hysilens (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_48f59581b9f2"
+    },
+    "布洛妮婭": {
+      "character_tag": "bronya rand",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_ce6099840cd9",
+      "mapping_note": "HSR 的布洛妮婭 = Bronya Rand（無系列後綴）。勿混淆《崩壞3》的 bronya zaychik。"
+    },
+    "托帕&帳帳": {
+      "character_tag": "topaz (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_9e704f94994e",
+      "mapping_note": "本映射只提供托帕 tag；名稱包含帳帳時不能把它默默刪除。使用者若要帳帳，缺外觀資料時依 D02 詢問，不猜其外觀。"
+    },
+    "三月七(巡獵)": {
+      "character_tag": "march 7th (hunt) (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "verified_on": "2026-08-30",
+      "verified_by": [
+        "user",
+        "codex"
+      ],
+      "verification_method": "使用者自行查證 Danbooru；Codex 回報以 Danbooru API exact-tag lookup 結果一致",
+      "identity_id": "char_53c98bb6f69d",
+      "mapping_note": "巡獵變體，保留本條 character_tag；不因輸出不穩自行退回本體。identity_id 與三月七相同，身份限制共同適用。"
+    },
+    "銀狼LV.999": {
+      "character_tag": "silver wolf (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_7559d9ca765f",
+      "mapping_note": "特殊版本仍是同一角色 tag。"
+    },
+    "開拓者(女)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105"
+    },
+    "開拓者(同諧)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105",
+      "mapping_note": "此表的星之路徑變體沿用 stelle tag；使用者指定的變體名稱仍是需求，缺必要服裝資料時按 D02 處理，不猜服裝。"
+    },
+    "開拓者(記憶)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105"
+    },
+    "開拓者(存護)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105"
+    },
+    "開拓者(毀滅)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105"
+    },
+    "開拓者(歡愉)星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105"
+    },
+    "Saber": {
+      "character_tag": "artoria pendragon (fate)",
+      "series_tag": "fate/stay night",
+      "identity_id": "char_c23ad447254f",
+      "mapping_note": "Fate 聯動角色，屬 Fate 系列非 HSR。"
+    }
+  },
+  "identity_policies": {
+    "char_ac69b8cbb27d": {
+      "sexualization": "prohibited",
+      "basis": "inherited_project_restriction",
+      "official_age_verified": false
+    },
+    "char_dd754af9bec2": {
+      "sexualization": "prohibited",
+      "basis": "inherited_project_restriction",
+      "official_age_verified": false
+    },
+    "char_bb8e27da6a63": {
+      "sexualization": "prohibited",
+      "basis": "inherited_project_restriction",
+      "official_age_verified": false
+    },
+    "char_9a0798d0e141": {
+      "sexualization": "prohibited",
+      "basis": "inherited_project_restriction",
+      "official_age_verified": false
+    },
+    "char_53c98bb6f69d": {
+      "sexualization": "prohibited",
+      "basis": "inherited_project_restriction",
+      "official_age_verified": false
+    }
+  },
+  "age_cues": {
+    "blocked_when_sexualized": [
+      "loli",
+      "shota",
+      "toddlercon",
+      "baby",
+      "infant",
+      "toddler",
+      "child",
+      "aged down",
+      "kindergarten uniform",
+      "elementary school",
+      "minor",
+      "underage",
+      "preteen",
+      "prepubescent",
+      "schoolchild",
+      "grade schooler",
+      "middle school student",
+      "junior high school student",
+      "little girl",
+      "little boy",
+      "childlike proportions"
+    ],
+    "explicit_minor_age": "0–17 歲",
+    "semantic_exceptions": [
+      "childhood friend",
+      "baby blue",
+      "babydoll dress"
+    ],
+    "not_age_proof": [
+      "petite",
+      "short",
+      "flat chest",
+      "small breasts",
+      "school uniform",
+      "high school student",
+      "adult"
+    ],
+    "note": "線索供 D03 語意判斷；不以是否命中清單取代身份評估。操作限制清單非完整官方年齡表。"
+  },
+  "behavior_source": "directing.md D02、D03"
+}
+

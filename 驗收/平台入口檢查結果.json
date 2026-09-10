@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-09-10T06:45:45.891Z",
+  "adapter_version": "0.2.2",
+  "behavior_version": "0.2.2",
+  "data_version": "0.2.0",
+  "passed": 12,
+  "total": 12,
+  "results": [
+    {
+      "name": "GPT 入口與共用來源一致",
+      "pass": true
+    },
+    {
+      "name": "GPT 文字交付與必要唯讀工具邊界",
+      "pass": true
+    },
+    {
+      "name": "GPT 核心及完整載入版驗證",
+      "pass": true
+    },
+    {
+      "name": "Claude 入口與共用來源一致",
+      "pass": true
+    },
+    {
+      "name": "Claude 文字交付與必要唯讀工具邊界",
+      "pass": true
+    },
+    {
+      "name": "Claude 核心及完整載入版驗證",
+      "pass": true
+    },
+    {
+      "name": "ANIMA_BEHAVIOR 跨平台逐字一致",
+      "pass": true
+    },
+    {
+      "name": "ANIMA_PROMPT_CONTRACT 跨平台逐字一致",
+      "pass": true
+    },
+    {
+      "name": "ANIMA_CHARACTERS 跨平台逐字一致",
+      "pass": true
+    },
+    {
+      "name": "目前正式來源與 v0.2.2 清單一致",
+      "pass": true
+    },
+    {
+      "name": "來源包未改（可存取時）",
+      "pass": true
+    },
+    {
+      "name": "50 個待測案例齊全",
+      "pass": true
+    }
+  ],
+  "model_execution_status": "NOT_RUN"
+}

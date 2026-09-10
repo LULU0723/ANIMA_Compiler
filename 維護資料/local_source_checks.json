@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-09-05T04:07:34.223Z",
+  "scope": "讀取本機原始碼；不是 GPU 執行測試",
+  "files": [
+    {
+      "name": "comfy/supported_models.py",
+      "sha256": "0f978036c17dfee74d106f04f0d361198c0d444b4e1839e2cd8920a9dcebd40c"
+    },
+    {
+      "name": "comfy/sd.py",
+      "sha256": "35ce040db161945c4a3f41bc435c30922b3bad7143f996896fbe5293c99d4f31"
+    },
+    {
+      "name": "comfy/text_encoders/anima.py",
+      "sha256": "0e3fc9011e84bf074bc0cac36828c0d635589c074bd5867e86e9f946aaa72787"
+    },
+    {
+      "name": "comfy/ldm/anima/model.py",
+      "sha256": "efbfe526a88704f5e425f7f72483d9db91baff672ca606c3a91488036d9aa757"
+    }
+  ],
+  "checks": {
+    "anima_shift_3": true,
+    "qwen_anima_dispatch": true,
+    "dual_tokenization": true,
+    "embedding_multiplication": true,
+    "padding_512": true
+  }
+}
