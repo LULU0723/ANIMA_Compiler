@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-10T07:25:11.958Z",
-  "version": "0.2.3",
+  "checked_at": "2026-09-17T08:59:19.782Z",
+  "version": "0.2.4",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
   "passed": 27,
   "failed": 0,
@@ -149,11 +149,11 @@
     }
   ],
   "source_hashes": {
-    "00_Claude_系統提示.md": "b8ce5ee56ada15e02145089dc5defe188e56ee16cab4ad6db0f5e6c85cdb89b9",
-    "directing.md": "fee0c32bad9dddb6a9e5bba8abf9f125cb264d5b025c161174dd90da075774a2",
+    "00_Claude_系統提示.md": "9fc4c91e85d8b6aab1cefff0616d7b36e149abf0c071170cc450beeae592ee33",
+    "directing.md": "cece608b9fbe22c879519b4aed583840501c953e95b59d2ed267960835c5a935",
     "characters.json": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82",
     "pipeline.json": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
   },
-  "project_sha256": "1f33f36bfeb50119b95b968ef2432a4d834496a0d6b2b500c2c3e097f056ceff",
+  "project_sha256": "9bf64007568c70dc0b8bc3af7c16c4532a72534d23b1d7ee606ba90fb4c9fe9a",
   "model_execution_status": "NOT_RUN"
 }
