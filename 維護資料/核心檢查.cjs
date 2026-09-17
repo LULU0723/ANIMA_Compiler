@@ -59,7 +59,7 @@ if(originalAvailable) check('原始來源未修改',sources.files.every(x=>sha(f
 else skip('原始來源未修改','來源不在此電腦；僅上方封存雜湊檢查已執行');
 check('冒煙涵蓋全部critical',cases.cases.filter(x=>x.severity==='critical').every(x=>cases.smoke_case_ids.includes(x.id)));
 check('冒煙ID有效且唯一',new Set(cases.smoke_case_ids).size===cases.smoke_case_ids.length&&cases.smoke_case_ids.every(id=>cases.cases.some(x=>x.id===id)));
-const out={checked_at:new Date().toISOString(),version:'0.2.3',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
+const out={checked_at:new Date().toISOString(),version:'0.2.4',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
 fs.writeFileSync(path.join(root,'驗收',platform+'_靜態檢查結果.json'),JSON.stringify(out,null,2)+'\n','utf8');
 console.log(JSON.stringify({platform,passed:out.passed,failed:out.failed,skipped:out.skipped,total:out.total,model_execution_status:out.model_execution_status}));
 if(out.failed)process.exitCode=1;
