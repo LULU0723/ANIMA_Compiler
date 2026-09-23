@@ -18,6 +18,26 @@
 
 部署時只需要 `00_<平台>_系統提示.md`（貼進專案指示）加上 `directing.md`、`characters.json`、`pipeline.json` 三份附件。
 
+## 目前預設品質詞
+
+以下摘自 `pipeline.json` 的 `prompt_contract`，以該檔為準；若兩者不一致，請更新本段。
+
+**正向前綴**（`{rating}` 依模式填入 `safe`／`sensitive`／`explicit`，預設 `safe`）：
+
+```text
+masterpiece, best quality, score_7, {rating},
+```
+
+**固定風格詞**：`high contrast`，放在角色／系列之後、其餘描述之前（不在前綴內）。
+
+**負向**（固定，單行）：
+
+```text
+worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes
+```
+
+前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
+
 ## 維護
 
 `00_*_系統提示.md` 與 `驗收/模型驗收案例.md` 是**衍生檔，不要手改**。
