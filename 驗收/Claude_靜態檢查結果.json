@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-09-17T08:59:19.782Z",
-  "version": "0.2.4",
+  "checked_at": "2026-09-23T07:04:19.764Z",
+  "version": "0.2.5",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
-  "passed": 27,
+  "passed": 31,
   "failed": 0,
-  "skipped": 1,
-  "total": 28,
+  "skipped": 2,
+  "total": 33,
   "results": [
     {
       "name": "角色與管線版本符合本次修改範圍",
@@ -63,12 +63,37 @@
       "detail": ""
     },
     {
-      "name": "固定 prefix 未改",
+      "name": "prefix 符合 v0.2.1 核准值",
       "status": "passed",
       "detail": ""
     },
     {
-      "name": "固定負向未改",
+      "name": "prefix 不含官方體系外品質詞",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "固定風格詞存在且位置已定義",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "負向 target 由 base、hands_feet_guard 組成",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "負向不含安全標籤",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "負向單行且逗號後有空格",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "序列化規則含括號跳脫與權重政策",
       "status": "passed",
       "detail": ""
     },
@@ -104,8 +129,8 @@
     },
     {
       "name": "快照負向依詞序與契約相符",
-      "status": "passed",
-      "detail": ""
+      "status": "skipped",
+      "detail": "快照早於 v0.2.1 契約，待使用者更新工作流並重新快照（V-007）"
     },
     {
       "name": "FaceDetailer 狀態一致",
@@ -149,11 +174,11 @@
     }
   ],
   "source_hashes": {
-    "00_Claude_系統提示.md": "9fc4c91e85d8b6aab1cefff0616d7b36e149abf0c071170cc450beeae592ee33",
-    "directing.md": "cece608b9fbe22c879519b4aed583840501c953e95b59d2ed267960835c5a935",
+    "00_Claude_系統提示.md": "0036110f171486f1b8669c2659e3d9a11a78ee314764b29673050a9606f469c3",
+    "directing.md": "7690c18a25765efa984bcae6acd7790f8ba38d042039ec28ca0b37a58a673f80",
     "characters.json": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82",
-    "pipeline.json": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
+    "pipeline.json": "2a339202bd52ebc9c1be87ec0ee89c9461d2817219a7441e6861c631dbd896ba"
   },
-  "project_sha256": "9bf64007568c70dc0b8bc3af7c16c4532a72534d23b1d7ee606ba90fb4c9fe9a",
+  "project_sha256": "3a2d5c8671ab4a04f1f46d7f4040a2db0118d911387c7901467e1629f0ba1883",
   "model_execution_status": "NOT_RUN"
 }

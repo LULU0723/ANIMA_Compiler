@@ -14,7 +14,7 @@ const c=json('characters.json'),p=json('pipeline.json');
 const results=[];
 function check(name,ok,detail=''){results.push({name,status:ok?'passed':'failed',detail});}
 function skip(name,detail){results.push({name,status:'skipped',detail});}
-check('角色與管線版本符合本次修改範圍',c._meta.version==='0.2.3'&&p._meta.version==='0.2.0');
+check('角色與管線版本符合本次修改範圍',c._meta.version==='0.2.3'&&p._meta.version==='0.2.1');
 check('53 項映射保留',Object.keys(c.character_name_zh_to_tag).length===53);
 const old=json('維護資料/原版封存/characters.json').character_name_zh_to_tag;
 check('原角色與系列 tag 未改',Object.entries(old).every(([n,e])=>c.character_name_zh_to_tag[n]?.character_tag===e.character_tag&&c.character_name_zh_to_tag[n]?.series_tag===e.series_tag));
@@ -35,8 +35,14 @@ check('全形巡獵名稱可命中',normalized.get(normalize('三月七（巡獵
 check('大黑塔與黑天鵝未合併',c.character_name_zh_to_tag['大黑塔'].identity_id!==c.character_name_zh_to_tag['黑天鵝'].identity_id);
 check('watch 四項均不捏造原因',entries.filter(e=>e.watch).length===4&&entries.filter(e=>e.watch).every(e=>e.watch.cause==='unknown'));
 const oldp=json('維護資料/原版封存/pipeline.json');
-check('固定 prefix 未改',p.prompt_contract.positive_prefix===oldp.prompt_contract.positive_prefix);
-check('固定負向未改',p.prompt_contract.negative.target===oldp.prompt_contract.negative.target);
+const pc=p.prompt_contract;
+check('prefix 符合 v0.2.1 核准值',pc.positive_prefix==='masterpiece, best quality, score_7, {rating},');
+check('prefix 不含官方體系外品質詞',!/very aesthetic|ultra detailed|high contrast/.test(pc.positive_prefix));
+check('固定風格詞存在且位置已定義',pc.fixed_style_tags?.tags==='high contrast'&&!!pc.fixed_style_tags.placement);
+check('負向 target 由 base、hands_feet_guard 組成',pc.negative.target===[pc.negative.base,pc.negative.hands_feet_guard].join(', '));
+check('負向不含安全標籤',!/\b(nsfw|explicit|sensitive|safe)\b/.test(pc.negative.target));
+check('負向單行且逗號後有空格',!/[\r\n]/.test(pc.negative.target)&&!/,\S/.test(pc.negative.target));
+check('序列化規則含括號跳脫與權重政策',!!pc.serialization?.literal_parentheses&&!!pc.serialization?.weighting);
 check('prefix 有且只有一個 rating 槽',(p.prompt_contract.positive_prefix.match(/\{rating\}/g)||[]).length===1);
 check('rating 模式資料完整',Object.values(p.prompt_contract.rating_by_mode).every(m=>p.prompt_contract.rating_slot.allowed.includes(m.rating)&&Array.isArray(m.required_tags)));
 check('非成人模式不常駐 adult',p.prompt_contract.rating_by_mode.safe.required_tags.length===0&&p.prompt_contract.rating_by_mode.sensitive.required_tags.length===0&&p.prompt_contract.rating_by_mode.adult.required_tags.includes('adult'));
@@ -45,7 +51,8 @@ check('CLIP→LoRA→正負編碼鏈有快照支持',[[12,38],[38,14],[38,15],[1
 check('主模型與 LoRA 未改',p.snapshot.models.unet.name===oldp.models.unet.unet_name&&JSON.stringify(p.snapshot.loras.entries)===JSON.stringify(oldp.loras.entries));
 check('尺寸及取樣參數未改',p.snapshot.latent.width===oldp.latent.width&&p.snapshot.latent.height===oldp.latent.height&&['steps','cfg','sampler_name','scheduler','denoise'].every(k=>p.snapshot.sampler[k]===oldp.sampler[k]));
 const tok=s=>s.split(',').map(x=>x.trim()).filter(Boolean);
-check('快照負向依詞序與契約相符',JSON.stringify(tok(p.snapshot.prompts.negative_node15))===JSON.stringify(tok(p.prompt_contract.negative.target)));
+if(p.snapshot.prompts.negative_tokens_match_target===false) skip('快照負向依詞序與契約相符','快照早於 v0.2.1 契約，待使用者更新工作流並重新快照（V-007）');
+else check('快照負向依詞序與契約相符',JSON.stringify(tok(p.snapshot.prompts.negative_node15))===JSON.stringify(tok(p.prompt_contract.negative.target)));
 check('FaceDetailer 狀態一致',p.snapshot.main_face_detailer.active===(p.snapshot.main_face_detailer.mode===0));
 check('D01–D08 各有唯一主章節',Array.from({length:8},(_,i)=>'D0'+(i+1)).every(id=>(texts['directing.md'].match(new RegExp('^## '+id+'｜','gm'))||[]).length===1));
 const cases=json('驗收/模型測試案例.json');
@@ -59,7 +66,7 @@ if(originalAvailable) check('原始來源未修改',sources.files.every(x=>sha(f
 else skip('原始來源未修改','來源不在此電腦；僅上方封存雜湊檢查已執行');
 check('冒煙涵蓋全部critical',cases.cases.filter(x=>x.severity==='critical').every(x=>cases.smoke_case_ids.includes(x.id)));
 check('冒煙ID有效且唯一',new Set(cases.smoke_case_ids).size===cases.smoke_case_ids.length&&cases.smoke_case_ids.every(id=>cases.cases.some(x=>x.id===id)));
-const out={checked_at:new Date().toISOString(),version:'0.2.4',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
+const out={checked_at:new Date().toISOString(),version:'0.2.5',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
 fs.writeFileSync(path.join(root,'驗收',platform+'_靜態檢查結果.json'),JSON.stringify(out,null,2)+'\n','utf8');
 console.log(JSON.stringify({platform,passed:out.passed,failed:out.failed,skipped:out.skipped,total:out.total,model_execution_status:out.model_execution_status}));
 if(out.failed)process.exitCode=1;

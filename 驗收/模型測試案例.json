@@ -1,5 +1,5 @@
 {
-  "version": "0.2.4",
+  "version": "0.2.5",
   "model_execution_status": "NOT_RUN",
   "method": "每案在新的專案對話載入對應00入口及 directing.md、characters.json、pipeline.json；turns依序送出。不要提供預期答案給受測模型。收錄完整回覆與工具活動；各模型建議三次重跑。",
   "cases": [
@@ -1285,10 +1285,94 @@
         "不新增女王身份、宮殿、能力或髮瞳色"
       ],
       "severity": "required"
+    },
+    {
+      "id": "T76",
+      "name": "字面括號跳脫與人數順序",
+      "turns": [
+        "卡芙卡，原裝，窗邊"
+      ],
+      "rules": [
+        "D06",
+        "D08"
+      ],
+      "assertions": [
+        "角色 tag 輸出為 kafka \\(honkai: star rail\\)",
+        "1girl 位於角色 tag 之前",
+        "high contrast 位於系列 tag 之後、外觀與一般描述之前",
+        "整段單行，每個逗號後有空格"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T77",
+      "name": "變體多組括號全部跳脫",
+      "turns": [
+        "三月七（巡獵），原裝，白背景"
+      ],
+      "rules": [
+        "D02",
+        "D06"
+      ],
+      "assertions": [
+        "輸出 march 7th \\(hunt\\) \\(honkai: star rail\\)",
+        "不因跳脫而改回本體 tag 或刪除 hunt"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T78",
+      "name": "強調需求不自動加權重",
+      "turns": [
+        "黃泉，原裝，雨夜街道，一定要強調下雨"
+      ],
+      "rules": [
+        "D06"
+      ],
+      "assertions": [
+        "不出現 (x:數值) 權重語法",
+        "以具體描述或前置順序表達強調",
+        "除跳脫外不出現未跳脫括號"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T79",
+      "name": "使用者明示權重照寫",
+      "turns": [
+        "鏡流，原裝，雪地，把 falling snow 權重設 1.5"
+      ],
+      "rules": [
+        "D06",
+        "D07"
+      ],
+      "assertions": [
+        "保留 (falling snow:1.5)，不改數值",
+        "角色 tag 括號仍跳脫",
+        "/檢查 時可列權重效果未驗證"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T80",
+      "name": "新 prefix 契約",
+      "turns": [
+        "流螢，原裝，屋頂夜景"
+      ],
+      "rules": [
+        "D06",
+        "D08"
+      ],
+      "assertions": [
+        "prefix 為 masterpiece, best quality, score_7, safe,",
+        "不出現 very aesthetic、ultra detailed",
+        "不附負向"
+      ],
+      "severity": "required"
     }
   ],
-  "adapter_version": "0.2.4",
-  "behavior_version": "0.2.4",
+  "adapter_version": "0.2.5",
+  "behavior_version": "0.2.5",
   "smoke_case_ids": [
     "T21",
     "T22",
@@ -1323,6 +1407,9 @@
     "T66",
     "T68",
     "T70",
-    "T73"
+    "T73",
+    "T76",
+    "T77",
+    "T80"
   ]
 }

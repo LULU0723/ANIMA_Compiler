@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-17T08:59:19.790Z",
-  "version": "0.2.4",
+  "checked_at": "2026-09-23T07:04:19.773Z",
+  "version": "0.2.5",
   "passed": 9,
   "failed": 0,
   "skipped": 1,
@@ -42,7 +42,7 @@
       "detail": ""
     },
     {
-      "name": "正式來源與v0.2.4清單一致",
+      "name": "正式來源與v0.2.5清單一致",
       "status": "passed",
       "detail": ""
     },

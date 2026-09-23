@@ -1,0 +1,66 @@
+{
+  "version": "0.2.5",
+  "basis": "使用者核准依 Anima 官方說明與 ComfyUI 原始碼修正：括號跳脫、權重、prefix、tag 順序、負向（不含安全標籤，2026-09-23）；characters.json 與封存維持原樣",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "7690c18a25765efa984bcae6acd7790f8ba38d042039ec28ca0b37a58a673f80"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "2a339202bd52ebc9c1be87ec0ee89c9461d2817219a7441e6861c631dbd896ba"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "867cec6188ca6a877a6c3f0ab40c4c2b39a57e8b6e0c711ecdb56ed1e72fb33e"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "d18e46a7be3a036b9e388886e6e67b204617de00597047c198ec19cb18da9b52"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "bc4ba03fd7958d4ff5043c7696beac5395d80be37aa34b60e0324fc5c380038d"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "5fbfd5ea8c234dd819c4b6b85f4b8a0316299cfd81e6eb7cec56c9b1f515dd41"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "2bc350f0ab7a40a97f6c179799faaedca73dd3a581ac88493d306a2ebab88027"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "2f36306a383812cb59ca0e867275211f0a7eaa6c2a91dbdefd62d58ae4a17d68"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "f1306d905836bf1cba68607be284ddfc230f5861ad999e11f14fda15ccea1469"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "148aa322239b10005eef88d7fe30bb1004796c7989a0b67a2486c54957be330d"
+    },
+    {
+      "name": "README.md",
+      "sha256": "8243f04dd08c20dfa3acf6a4eccc720af8b193980719deb531b3eb1043fe0477"
+    }
+  ]
+}

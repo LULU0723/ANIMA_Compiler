@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "version": "0.2.0",
-    "updated": "2026-09-05",
+    "version": "0.2.1",
+    "updated": "2026-09-23",
     "schema_version": 2,
     "scope": "prompt_contract 是輸出資料契約；snapshot 是磁碟工作流快照，非模型或 GPU 實跑驗證。"
   },
@@ -9,7 +9,12 @@
     "compiler_outputs": [
       "positive"
     ],
-    "positive_prefix": "best quality, score_7, score_9, {rating}, very aesthetic, ultra detailed, high contrast,",
+    "positive_prefix": "masterpiece, best quality, score_7, {rating},",
+    "fixed_style_tags": {
+      "tags": "high contrast",
+      "placement": "角色／系列之後、外觀與一般描述之前（官方順序的一般標籤段開頭）",
+      "note": "原 prefix 的 high contrast 為使用者既有風格決定，移出 prefix 以符合官方 tag 順序，仍為固定輸出。"
+    },
     "rating_slot": {
       "default": "safe",
       "allowed": [
@@ -35,12 +40,25 @@
       }
     },
     "content_policy_source": "directing.md D03",
-    "negative": {
-      "base": "worst quality, low quality, score_1, score_2, score_3, artist name",
-      "hands_feet_guard": "bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
-      "target": "worst quality, low quality, score_1, score_2, score_3, artist name, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes"
+    "tag_order": {
+      "sequence": "prefix（品質／rating）→ 人數（1girl、1boy 等）→ 角色 → 系列 → 固定風格詞 → 其餘描述",
+      "source": "Anima 官方模型卡 Tag order：[quality/meta/year/safety] [1girl/1boy/1other] [character] [series] [artist] [general]"
     },
-    "prefix_policy": "固定 prefix 沿用原版。是否修訂由規格維護決定，不由 observations 自動觸發。"
+    "serialization": {
+      "separator": "每個逗號後一個半形空格；整段單行，不換行",
+      "literal_parentheses": "tag 內的字面括號輸出為 \\( 與 \\)，例：kafka \\(honkai: star rail\\)。characters.json 仍存未跳脫原文。",
+      "literal_parentheses_reason": "ComfyUI 原生 CLIPTextEncode 的 token_weights() 會把未跳脫的 (...) 視為 1.1 權重並移除括號；只有 \\( \\) 保留字面括號（comfy/sd1_clip.py）。",
+      "weighting": "預設不輸出權重語法；僅在使用者明示要求權重時照寫其數值。",
+      "weighting_reason": "ComfyUI anima.py 將 Qwen 分支權重固定為 1.0，權重只作用於 T5 id 分支；官方指出權重需高於 SDXL 慣用值（例 (chibi:2)）。本 pipeline 尚未測出有效區間。"
+    },
+    "negative": {
+      "base": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration",
+      "hands_feet_guard": "bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "target": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "format": "單行、逗號加空格，不換行",
+      "source": "base 依官方建議負向；hands_feet_guard 為本專案沿用。使用者決定不加入安全標籤（nsfw, explicit）。"
+    },
+    "prefix_policy": "prefix 依官方 Anima-Base 建議前綴（masterpiece, best quality, score_7, safe）改寫，rating 保留為槽位。移除 very aesthetic、ultra detailed：兩者不在官方品質／meta 標籤體系內。score_7 是否適用目前的微調模型待確認（見 V-004）；若其基底為 Anima-Aesthetic，官方建議正負向皆不用 score_* 標籤。"
   },
   "snapshot": {
     "checked_at": "2026-09-05T04:07:34.220Z",
@@ -112,8 +130,8 @@
     "prompts": {
       "positive_node14": "best quality, score_7, score_9, sensitive, very aesthetic, ultra detailed, high contrast, 1girl, adult, solo, long black hair, slightly damp at the ends, dark eyes, oversized white dress shirt, top buttons undone, collar falling open at the shoulder, sleeves swallowing her hands to the knuckles, bare legs, dim apartment entryway, doorframe cutting the composition on one side, unlit room stretching away behind her, single warm lamp behind her throwing a low backlight, rim light along her jaw, collarbone and the edge of the shirt, her face left half in shadow, soft haze in the warm pool of light, leaning one shoulder against the doorframe, one ankle crossed loosely over the other, one hand still resting on the doorframe above her head, the other hanging relaxed at her side, half-closed eyes, faint knowing smile, looking at viewer, keys still hooked on one finger, three-quarter view, cowboy shot",
       "negative_node15": "worst quality, low quality, score_1, score_2, score_3, artist name,\nbad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
-      "negative_tokens_match_target": true,
-      "note": "提示文字是一次磁碟快照，不是推薦範例，不給編譯器照抄。"
+      "negative_tokens_match_target": false,
+      "note": "提示文字是一次磁碟快照（2026-09-05），不是推薦範例，不給編譯器照抄。v0.2.1 契約變更後，快照負向尚未依新契約更新（且含換行），待使用者更新工作流並重新快照。"
     },
     "main_face_detailer": {
       "node": 41,
@@ -609,8 +627,27 @@
       "id": "V-003",
       "item": "目前 node 14 包含 sensitive 與 adult，與新契約不一致；來源未確認",
       "status": "OBSERVED_NOT_MODIFIED"
+    },
+    {
+      "id": "V-004",
+      "item": "score_7／score_* 標籤是否適用 miaomiaoHarem_anima14（需確認其基底為 Anima-Base 或 Anima-Aesthetic）",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "V-005",
+      "item": "角色 tag 括號跳脫 \\( \\) 與未跳脫的成圖差異；watch 角色與穩定角色各 2 名、每名 3–4 固定種子",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "V-006",
+      "item": "新增 blurry／jpeg artifacts／chromatic aberration 對成圖的影響",
+      "status": "NOT_RUN"
+    },
+    {
+      "id": "V-007",
+      "item": "工作流負向節點尚未依 v0.2.1 契約更新",
+      "status": "PENDING_USER_UPDATE"
     }
   ],
   "reference_source": "維護資料/pipeline_history.json（歷史資訊，不用作目前執行狀態）"
 }
-
