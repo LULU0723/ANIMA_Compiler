@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-09-26T13:42:25.502Z",
-  "version": "0.2.5",
+  "checked_at": "2026-09-26T15:44:17.248Z",
+  "version": "0.2.6",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
   "passed": 32,
   "failed": 0,
@@ -78,7 +78,7 @@
       "detail": ""
     },
     {
-      "name": "負向 target 由 base、hands_feet_guard 組成",
+      "name": "負向 target 由 base、hands_feet_guard、skin_finish_guard 組成",
       "status": "passed",
       "detail": ""
     },
@@ -174,11 +174,11 @@
     }
   ],
   "source_hashes": {
-    "00_GPT_系統提示.md": "1011f93648534d2515f96bead02c5cff8664f093354e232157087d074eca841d",
-    "directing.md": "7690c18a25765efa984bcae6acd7790f8ba38d042039ec28ca0b37a58a673f80",
+    "00_GPT_系統提示.md": "6ec48808fb93ee12c7b592122dfda4418ad880f3a984cd28b72231fe75ae44ab",
+    "directing.md": "f474488101741197cf185abaa067d7e1b30514324f3d8f4c08760cab3809b821",
     "characters.json": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82",
-    "pipeline.json": "2a339202bd52ebc9c1be87ec0ee89c9461d2817219a7441e6861c631dbd896ba"
+    "pipeline.json": "cc6297eb9f21890608deabf488dc3b412a2e1c440600fe78c69d8d6608cf2bbe"
   },
-  "project_sha256": "6a643a5c5383973a6a4b730b2dee4da567f2c1ff19bcdc6dd172e3ea0181b210",
+  "project_sha256": "21bf8faf3457c55377aa8a74dbe08b2cc8da0bcfda0ac133cc69f30f775a5a20",
   "model_execution_status": "NOT_RUN"
 }

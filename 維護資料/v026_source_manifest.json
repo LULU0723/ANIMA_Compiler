@@ -1,0 +1,66 @@
+{
+  "version": "0.2.6",
+  "basis": "使用者決定在固定負向末尾加入 shiny skin（skin_finish_guard，2026-09-26，效果未測 V-008）；契約 0.2.2；其餘規則內容未改，directing.md、observations.md 等只更新版本號與紀錄",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "f474488101741197cf185abaa067d7e1b30514324f3d8f4c08760cab3809b821"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "cc6297eb9f21890608deabf488dc3b412a2e1c440600fe78c69d8d6608cf2bbe"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "3dcecf407054f850dbfa1d301364515c3eb4535e317b7f1db7b141bf03396578"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "1e4a67975c65cecd2472bf86e3264739dc992069d326fd702cbfe2d7060cb953"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "f0ecf90af3f2acd49b3383532919012e1e22741d3c42767b41b38db37707d9c3"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "5fbfd5ea8c234dd819c4b6b85f4b8a0316299cfd81e6eb7cec56c9b1f515dd41"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "c0fe67df8878e18f68e5661deba510b87d29fc88fc8aed0f059f8ac5203da2df"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "b0eac87b5a71a84ac69a015262be266dc2f9630e998b123979b4a34f60019deb"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "f1306d905836bf1cba68607be284ddfc230f5861ad999e11f14fda15ccea1469"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "148aa322239b10005eef88d7fe30bb1004796c7989a0b67a2486c54957be330d"
+    },
+    {
+      "name": "README.md",
+      "sha256": "0b7f3bab7102bbca83771c1ffe9b5aabd757830cff5a53377177162a0ac6b097"
+    }
+  ]
+}
