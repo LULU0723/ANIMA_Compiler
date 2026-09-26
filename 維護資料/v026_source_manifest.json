@@ -12,15 +12,15 @@
     },
     {
       "name": "pipeline.json",
-      "sha256": "cc6297eb9f21890608deabf488dc3b412a2e1c440600fe78c69d8d6608cf2bbe"
+      "sha256": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
     },
     {
       "name": "observations.md",
-      "sha256": "3dcecf407054f850dbfa1d301364515c3eb4535e317b7f1db7b141bf03396578"
+      "sha256": "710d2dbb7a0824a973f7e53fc0e9f827a19fc2c45552549158def845ab595885"
     },
     {
       "name": "使用說明.md",
-      "sha256": "1e4a67975c65cecd2472bf86e3264739dc992069d326fd702cbfe2d7060cb953"
+      "sha256": "61e83c20d67523e8178fa2ed523d95fa2b7624c75b72050f1d36795f9ae0d41c"
     },
     {
       "name": "本次修訂說明.md",
@@ -60,7 +60,7 @@
     },
     {
       "name": "README.md",
-      "sha256": "0b7f3bab7102bbca83771c1ffe9b5aabd757830cff5a53377177162a0ac6b097"
+      "sha256": "d224cd778fcd7110195a884b29fd86f4adfa111e2d7d1c24ba1babc151098b8d"
     }
   ]
 }
