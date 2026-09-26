@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "0.2.2",
-    "updated": "2026-09-26",
+    "updated": "2026-09-27",
     "schema_version": 2,
     "scope": "prompt_contract 是輸出資料契約；snapshot 是磁碟工作流快照，非模型或 GPU 實跑驗證。"
   },
@@ -646,13 +646,13 @@
     },
     {
       "id": "V-007",
-      "item": "工作流負向節點尚未依 v0.2.2 契約更新（v0.2.6 在末尾新增 shiny skin）",
-      "status": "PENDING_USER_UPDATE"
+      "item": "工作流負向節點依 v0.2.2 契約更新：2026-09-27 出圖紀錄確認 AnimaAdvancedV9 喵喵的負向已含 shiny skin；本檔 snapshot 仍是舊工作流，未重新快照",
+      "status": "WORKFLOW_UPDATED_SNAPSHOT_STALE"
     },
     {
       "id": "V-008",
-      "item": "負向加 shiny skin 對皮膚光澤的影響；另需確認是否削弱使用者明示的 wet／sweat／oiled 等濕潤效果",
-      "status": "NOT_RUN"
+      "item": "負向加 shiny skin 對皮膚光澤的影響；是否削弱使用者明示的濕潤效果。單題 4 種子目視：濕亮反光 4/4 去除；明示濕潤時汗珠保留、光澤減弱（見 observations.md SHINY-20260927）",
+      "status": "OBSERVED_SINGLE_TOPIC"
     }
   ],
   "reference_source": "維護資料/pipeline_history.json（歷史資訊，不用作目前執行狀態）"

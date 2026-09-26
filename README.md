@@ -36,7 +36,7 @@ masterpiece, best quality, score_7, {rating},
 worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes, shiny skin
 ```
 
-前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用；`shiny skin` 為 v0.2.6 使用者決定加入，效果未測（`pipeline.json` V-008）。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
+前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用；`shiny skin` 為 v0.2.6 使用者決定加入；單題實測可去除濕亮反光，明示濕潤時會減弱光澤但保留汗珠（`observations.md` SHINY-20260927）。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
 
 ## 維護
 

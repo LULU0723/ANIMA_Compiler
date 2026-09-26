@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-26T15:44:17.500Z",
+  "checked_at": "2026-09-26T16:23:00.119Z",
   "version": "0.2.6",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
   "passed": 32,
@@ -177,8 +177,8 @@
     "00_Claude_系統提示.md": "9c3394d637424ca08430d34af5e7bac283e255420833190e640cb81d80fc6bed",
     "directing.md": "f474488101741197cf185abaa067d7e1b30514324f3d8f4c08760cab3809b821",
     "characters.json": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82",
-    "pipeline.json": "cc6297eb9f21890608deabf488dc3b412a2e1c440600fe78c69d8d6608cf2bbe"
+    "pipeline.json": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
   },
-  "project_sha256": "3e73dde6191cba5520bc3ad13458ce354817d1ed13de09d587d16b0a4bb72678",
+  "project_sha256": "17f357b2138798fc2b580b78c928963967d51848a640390e18ce59816697b01b",
   "model_execution_status": "NOT_RUN"
 }
