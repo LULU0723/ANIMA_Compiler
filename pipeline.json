@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "version": "0.2.1",
-    "updated": "2026-09-23",
+    "version": "0.2.2",
+    "updated": "2026-09-26",
     "schema_version": 2,
     "scope": "prompt_contract 是輸出資料契約；snapshot 是磁碟工作流快照，非模型或 GPU 實跑驗證。"
   },
@@ -54,9 +54,10 @@
     "negative": {
       "base": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration",
       "hands_feet_guard": "bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
-      "target": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes",
+      "skin_finish_guard": "shiny skin",
+      "target": "worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes, shiny skin",
       "format": "單行、逗號加空格，不換行",
-      "source": "base 依官方建議負向；hands_feet_guard 為本專案沿用。使用者決定不加入安全標籤（nsfw, explicit）。"
+      "source": "base 依官方建議負向；hands_feet_guard 為本專案沿用；skin_finish_guard 為使用者 2026-09-26 決定加入（參考 One Obsession Anima v4 作者範例負向，本專案未測，見 V-008）。使用者決定不加入安全標籤（nsfw, explicit）。"
     },
     "prefix_policy": "prefix 依官方 Anima-Base 建議前綴（masterpiece, best quality, score_7, safe）改寫，rating 保留為槽位。移除 very aesthetic、ultra detailed：兩者不在官方品質／meta 標籤體系內。score_7 是否適用目前的微調模型待確認（見 V-004）；若其基底為 Anima-Aesthetic，官方建議正負向皆不用 score_* 標籤。"
   },
@@ -645,8 +646,13 @@
     },
     {
       "id": "V-007",
-      "item": "工作流負向節點尚未依 v0.2.1 契約更新",
+      "item": "工作流負向節點尚未依 v0.2.2 契約更新（v0.2.6 在末尾新增 shiny skin）",
       "status": "PENDING_USER_UPDATE"
+    },
+    {
+      "id": "V-008",
+      "item": "負向加 shiny skin 對皮膚光澤的影響；另需確認是否削弱使用者明示的 wet／sweat／oiled 等濕潤效果",
+      "status": "NOT_RUN"
     }
   ],
   "reference_source": "維護資料/pipeline_history.json（歷史資訊，不用作目前執行狀態）"

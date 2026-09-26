@@ -33,10 +33,10 @@ masterpiece, best quality, score_7, {rating},
 **負向**（固定，單行）：
 
 ```text
-worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes
+worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes, shiny skin
 ```
 
-前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
+前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用；`shiny skin` 為 v0.2.6 使用者決定加入，效果未測（`pipeline.json` V-008）。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
 
 ## 維護
 
@@ -50,7 +50,7 @@ node 維護資料/重建與檢查.cjs          # 重建衍生檔並執行檢查
 node 維護資料/重建與檢查.cjs --check  # 只檢查，不重建
 ```
 
-來源清單（`維護資料/v025_source_manifest.json`）不會自動更新，需人工審核變更後更新雜湊——這是刻意的，避免把意外修改自動認可。完整流程見 `使用說明.md` 的「維護」段。
+來源清單（`維護資料/v026_source_manifest.json`）不會自動更新，需人工審核變更後更新雜湊——這是刻意的，避免把意外修改自動認可。完整流程見 `使用說明.md` 的「維護」段。
 
 ## 狀態
 

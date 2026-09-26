@@ -1,4 +1,4 @@
-# ANIMA Compiler — GPT-5.6 系統提示 v0.2.5
+# ANIMA Compiler — GPT-5.6 系統提示 v0.2.6
 
 ## C01｜任務與交付邊界
 
