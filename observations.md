@@ -62,6 +62,74 @@
 
 組 1 的四對全有／全無是本輪最清楚的實務訊號，但 n=4 不能稱為決定性、排除巧合或保證不需更多樣本。未查明模型 tag 對應機制，不寫成「已確認 tag 體系會誘發」。組 2 構圖與解剖穩定性暫列待研究，本次不另開測試、不改規則。
 
+## WAIST-20260926｜腰腹淺線條（馬甲線）描述測試
+
+問題：在保留柔軟身體與收腰輪廓的前提下，哪種描述能穩定做出淺淺的馬甲線，同時避免身體彩繪與腹肌分塊。
+
+背景：先前以大黑塔做過五種寫法（方案1–3、A、B），使用者回報方案1、2出現彩繪、A 變成明顯腹肌、B 最接近目標。這些比較每次同時改多處，且未留圖與逐圖紀錄，只作為本次假設來源，不作證據。本次改用原創角色，排除角色 tag 的體型預設與括號跳脫的影響。
+
+### 條件
+
+| 項目 | 內容 |
+|---|---|
+| 模型 | miaomiaoHarem_anima14.safetensors（sha256 9542fdd6db4f579b276a3fa6e26955e7e377a42ba65efd237dcda0b14e044d1b） |
+| LoRA | (anima)(繪師)今沢imazawa 0.2（sha256 6d01d4d4d6be7abe42bcabad523ebf6f5fbd913f8ba0d7c686204c3b6d944ffc）、(anima)(繪師)alterkyon 0.7（sha256 3ccbc78df82459c18f7be3f79358d2b01363debe78275013b2b200304313714e） |
+| 工作流 | AnimaAdvancedV9 喵喵（本機，已加括號跳脫節點；本題無括號，不受影響）。32 張的實際執行圖在排除提示詞與種子後完全一致；各圖內嵌工作流雜湊因介面狀態不同而不一致，故以執行圖比對代替 |
+| 參數 | 30 步、Euler a、normal、CFG 5、1024×1536、種子 1–4 |
+| 實際有執行 | CLIPNegPip（提示無負權重，不作用）、觸發詞 style_imazawa 接在正向最前面（各組相同）。後製對比／色階與各修飾器本次未執行 |
+| 負向 | worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes（僅 G6 另加） |
+| 圖片位置 | 使用者本機 E:\output\2026-09-26-205546 至 211846 的 32 張；C0 另有 8 張隨機種子試跑，未納入 |
+
+C0 正向（觸發詞與 LoRA 字串之外）：
+
+```text
+masterpiece, best quality, score_7, sensitive, 1girl, high contrast, adult, long brown hair, brown eyes, soft delicate body, loose thin camisole top, low-rise soft lounge shorts, simple background, soft morning light, warm glow along the skin, stretching with both arms raised high overhead, fingers interlaced, back arched slightly, camisole riding up to reveal the bare midriff, exposed navel, soft flat stomach, narrow waist, the waist curving in sharply between the lower ribs and the hips, clear hourglass-like side contour, gentle soft shading on either side of the navel, shallow shadowed dips where the light grazes the lightly toned abdomen, low-rise waistband sitting low on the hips, eyes half-closed, lips parted in a languid sigh, relaxed sultry expression, looking at viewer, from slightly below, cowboy shot
+```
+
+### 各組單一變動
+
+| 組 | 變動 | 對應假設 |
+|---|---|---|
+| G1 | `on either side of the navel` → `along the center of the stomach above the navel` | H2 位置 |
+| G2 | 刪 `shallow shadowed dips where the light grazes`，保留 `the lightly toned abdomen` | H2 只寫兩側 |
+| G3 | `soft morning light` → `soft side lighting` | H3 側光 |
+| G4 | 刪 `lightly toned` | H4 |
+| G5 | `gentle soft shading` → `faint vertical lines` | H1 line 字詞 |
+| G6 | G5 正向，負向末尾加 `bodypaint, body writing, tattoo` | 負向能否壓彩繪 |
+| N0 | 刪除兩句陰影描述（`gentle soft shading…` 與 `shallow shadowed dips…`） | 陰影句是否必要 |
+
+### 結果
+
+判讀：使用者整體印象兩輪皆為「差不多」。助手逐圖目視，並以腰腹裁切區（寬 15–85%、高 40–85%）計算與同種子 C0 的平均像素差（0–255）；參考尺度為 C0 換種子之間的差 46.6。像素差包含構圖小位移，不等於線條強度。
+
+| 組 | 彩繪 | 明顯腹肌 | 收腰保留 | 可判讀 | 與 C0 像素差 s1／s2／s3／s4（平均） |
+|---|---|---|---|---|---|
+| C0 | 0/4 | 0/4 | 4/4 | 4/4 | — |
+| G1 | 0/4 | 0/4 | 4/4 | 4/4 | 4.2／3.4／6.0／2.7（4.1） |
+| G2 | 0/4 | 0/4 | 4/4 | 4/4 | 21.3／27.2／10.7／13.4（18.1） |
+| G3 | 0/4 | 0/4 | 4/4 | 4/4 | 6.0／5.6／11.5／4.3（6.9） |
+| G4 | 0/4 | 0/4 | 4/4 | 4/4 | 18.0／6.9／10.2／6.7（10.4） |
+| G5 | 0/4 | 0/4 | 4/4 | 4/4 | 32.2／5.7／7.6／8.3（13.4） |
+| G6 | 0/4 | 0/4 | 4/4 | 4/4 | 32.6／10.2／12.0／10.2（16.3） |
+| N0 | 0/4 | 0/4 | 4/4 | 4/4 | 48.2／28.7／15.1／21.5（28.4） |
+
+所有 32 張都有淡的中線與兩側凹陷，C0 依計畫門檻（至少 3/4 兩側淡或適中、無彩繪、無明顯腹肌）即達標。G1–G6 間，使用者與助手都無法分辨線條強弱的方向性差異。N0 與 C0：助手目視 s1、s4 的 C0 中線與兩側陰影較明顯，s2、s3 無可見差別。
+
+| 假設 | 本次結果 |
+|---|---|
+| H1 line 字詞造成彩繪 | 未重現：G5 0/4 彩繪；G6 因此無可壓制的對象 |
+| H2 陰影寫在哪裡有差 | 未見差異：G1 與 C0 像素差 4.1 |
+| H3 側光使線條更明顯 | 未見效果：G3 與 C0 像素差 6.9，光向本身也無明顯改變 |
+| H4 lightly toned 造成腹肌 | 無證據：所有組 0/4 明顯腹肌 |
+
+### 判讀邊界
+
+- 可支持：在本題、本姿勢、本組 LoRA 下，淺線條主要由姿勢與輪廓描述（narrow waist、soft flat stomach、hourglass-like side contour）產生；陰影句作用弱（N0 對照 2/4 可見減弱），其位置與光向用字幾乎不影響結果。方向與 4-8「過細描述多被忽略」一致，但量測方式不同，不能合併計數。
+- 不能支持：line 字詞「不會」造成彩繪。先前大黑塔回報的彩繪與腹肌本次未重現，成因可能涉及角色 tag 或當時其他用字，未驗證。
+- 樣本：單一原創角色、單一姿勢（伸懶腰、背微拱，腹部被拉長）、每組 4 種子；「線條較明顯」為目視判斷。正面站立或側身等腹部未拉長的姿勢未測。
+
+決策：未達本檔採用門檻（至少兩種題目），不修改 directing.md。實務上的暫行做法——需要較明顯線條時保留一句簡短陰影描述、用字與位置不必講究，否則可省略——僅供使用者自行參考，不是編譯規則。若要升為規則，下一步是在不同姿勢（例如側身站立）重跑 C0 與 N0。
+
 ## v0.2.3 維護註記
 
 本版更新文件版本並納入現行來源清單，未新增或重跑成圖證據。CAMERA-20260909 仍是使用者回報，適用限制不變。
