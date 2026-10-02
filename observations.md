@@ -174,6 +174,86 @@ sweat, wet, skin glistening with a light sheen of sweat, beads of sweat on her s
 
 決策：shiny skin 維持在固定負向。需要整片濕亮（淋雨、泳池、濕身）時，由使用者在該張暫時從工作流負向移除；這是工作流操作，不是編譯規則，directing.md 不改。只想要皮膚出汗、不想衣服變濕時，`wet` 會連衣服一起作用；此點僅一題觀察，未達採用門檻，不寫入規則。
 
+## GAZE-20261002｜視線落點提前測試（探索，不採用）
+
+來源：使用者於聊天專案回報，未取得原圖與 PNG 參數；以下數字為使用者回報。
+
+| 項目 | 內容 |
+|---|---|
+| 問題 | 把視線描述提前，能否讓角色看向指定物件 |
+| 單一變動 | 「低頭看領巾」從表情段移到固定風格詞之後 |
+| 種子 | 1–4 |
+| 模型／LoRA／工作流雜湊 | 未知 |
+| 其他參數 | 使用者說明一致，未核對 |
+| 結果 | 看觀者：對照 2/4，實驗 0/4。未看觀者的圖多為垂眼、看下方偏側；頭轉向目標物的較少 |
+
+可支持：單一題目、差異只在 2 個種子，可能減少看觀者。不能支持：能看向指定物件。決策：不採用；提案時不以精確視線落點作為方案之間的主要差異。另見 FLAT-20261002 的「看向窗外」0/4。
+
+## PROPOSAL-20261002｜畫面提案演練（使用者回報，多變因）
+
+來源：使用者於聊天專案回報與目視判讀，各 2 張，未取得原圖與參數。每題同時改變角色、服裝、場景、姿勢、視角，只作為修訂草案的動機紀錄，不是效果證據。
+
+- 題一（開拓者星、水手服、站著；現行規則）：立繪感，有動態但缺情境。有執行：服裝主體、全身、斜側、風。未執行：視線落點、手部分工、側光方向；仰角效果弱。非預期：裙子變短且大幅飄起、上衣變短版露腰。設計失誤：safe 下疊加仰視、微風、裙褶擺動、全身。
+- 題二（大黑塔、黑色透膚褲襪；先討論三案，選方案 2，3 件物件）：使用者判斷「沒那麼平」。推測因素（未驗證）：前中後景層次、畫面內窗光、躺姿加俯視。分級預估 safe，成圖腿部占畫面中央、模型自行改成露肩，偏 sensitive。
+- 跨題觀察：大決策較容易被執行，小決策較常被忽略。後續由 FLAT-20261002 做單題對照。
+
+## FLAT-20261002｜「畫面平」的成因：背景 vs 姿勢與鏡頭
+
+問題：精簡題成圖像立繪（PROPOSAL-20261002 題一）。平有多少來自背景，多少來自人物的姿勢與鏡頭。
+
+### 條件
+
+miaomiaoHarem_anima14（sha256 9542fdd6db4f579b276a3fa6e26955e7e377a42ba65efd237dcda0b14e044d1b）、LoRA 今沢imazawa 0.2 與 alterkyon 0.7（雜湊見 WAIST-20260926）、AnimaAdvancedV9 喵喵、30 步、Euler a、normal、CFG 5、1024×1536、種子 1–4、觸發詞 style_imazawa 接在正向最前面、負向為 v0.2.6 契約（含 shiny skin）。24 張的實際執行圖在排除提示詞與種子後完全一致。圖片：使用者本機 E:\output\2026-10-02-200320 至 203204。
+
+E0 正向：
+
+```text
+masterpiece, best quality, score_7, safe, 1girl, stelle \(honkai: star rail\), honkai: star rail, high contrast, white serafuku, navy sailor collar, red neckerchief, navy pleated skirt, black loafers, simple background, light grey background, warm afternoon light from the left, soft shadows, standing with her weight on one leg, hands clasped behind her back, slight smile, looking at viewer, three-quarter view, full body
+```
+
+| 組 | 相對前一組的變動 | 對應問題 |
+|---|---|---|
+| E0 | 單色背景 | 現行精簡題做法 |
+| E1 | 背景換成 `quiet indoor space, large window on the left wall, plain wall behind her, wooden floor, the far wall slightly out of focus`，光線段加 `light falling across the floor in a bright patch` | 只有空間、不指定地點、不加物件 |
+| E2 | 背景換成放學後教室：課桌、黑板、窗、掛在桌邊的書包 | 完整場景 |
+| K1 | 以 E1 為底，姿勢與視線改為 `leaning one shoulder against the window frame, one hand resting on the window sill, looking out the window, calm expression, warm light falling across her face`；鏡頭不變 | 姿勢類型與人物—空間關係 |
+| K2 | 以 E1 為底，姿勢不變；鏡頭改為 `from side, from above, cowboy shot, she stands on the right side of the frame with open space on the left` | 鏡頭高度、距離、位置 |
+| K3 | K1 的 `full body` 改為 `from above, cowboy shot`，並刪除 `black loafers` | K1＋K2 組合 |
+
+K3 未沿用 K2 的偏右擺位，因為與 K1 靠在左側窗框衝突；刪除鞋子見下方第 4 點。
+
+### 結果
+
+判讀：使用者整體印象為 E 三組「不是背景的問題」、K1／K2「有感覺多了」、K3「好蠻多的」。執行與否為助手逐張目視。
+
+| 項目 | 結果 |
+|---|---|
+| E0／E1／E2 同種子的人物姿勢、角度、置中、平視 | 三組相同（4/4）；背景改變光線與氣氛，人物仍是立繪姿勢 |
+| E1 自行長出可互動物件 | 0/4（只有牆、窗、地板、光斑） |
+| K1 靠窗並手搭窗台 | 4/4 |
+| K1、K3 看向窗外 | 各 0/4，均看觀者 |
+| K2 cowboy shot | 4/4 |
+| K2、K3 俯視 | 各 4/4 |
+| K2 側面 | 0/4（仍為斜側） |
+| K2 人物偏右 | 大致成立，約 3–4/4 |
+| K3 裁切後仍保留靠窗與手搭窗台 | 4/4 |
+| 畫面邊角多出鞋子或腿 | K2 3/4（正向仍含 black loafers 且裁切到大腿）；K3 0/4（已刪鞋子） |
+| 袖長 | E1、K1 長袖 4/4；K2、K3 短袖 4/4（正向未指定袖長） |
+
+### 判讀邊界
+
+可支持（單一題目、每組 4 種子）：
+
+1. 只換背景不能消除立繪感；背景改善的是光線與氣氛。
+2. 姿勢類型（人物與空間的關係）和鏡頭高度、距離都會被執行，也改變畫面感受；兩者疊加時沒有互相抵消。
+3. 精確視線目標再次未被執行；連同 GAZE-20261002，三次嘗試皆未看向指定目標。
+4. 裁切看不到的部位仍寫其服裝時，模型可能把它擠進畫面邊緣。這支持 D04-F 既有的「不必設計或輸出無關框外細節」，但 K3 同時改了姿勢，不是單一變動。
+5. 未指定的服裝屬性（袖長）會隨構圖改變；成因未知。
+
+不能支持：其他角色、服裝、場景是否同樣成立；「平」的程度只有使用者與助手的整體印象，沒有評分量表；K 系列每組改的是一類決策，不是單一字詞，無法分辨是哪個詞起作用。
+
+決策：未達跨題目採用門檻，不修改 directing.md；作為「維護資料/草案/v0.2.7_畫面構成修訂草案.md」中 P2、P4、P5、P7 的證據來源。
+
 ## v0.2.3 維護註記
 
 本版更新文件版本並納入現行來源清單，未新增或重跑成圖證據。CAMERA-20260909 仍是使用者回報，適用限制不變。
