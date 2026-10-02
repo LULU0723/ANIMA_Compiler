@@ -1,10 +1,10 @@
 {
   "_meta": {
-    "version": "0.2.3",
-    "updated": "2026-09-10",
+    "version": "0.2.4",
+    "updated": "2026-10-02",
     "schema_version": 2,
     "scope": "角色映射、身份關係、操作限制；不含外觀 skeleton。",
-    "mapping_verification": "沿用原版 53 項，未重新查證全部 tag。",
+    "mapping_verification": "沿用原版 53 項，未重新查證全部 tag。v0.2.4 新增別名「開拓者星」，身份與 tag 同「開拓者(女)星」。",
     "provenance": "以下映射沿用自舊專案檔；2026-08-30 已用當日 Danbooru API 批次檢查全部 53 個映射項目。玲可、希露瓦、三月七(巡獵)已修正並加上 verified_on；其餘批次命中不等於逐筆完成角色語義人工審核，發現錯誤時仍應回報。"
   },
   "normalization": {
@@ -295,6 +295,12 @@
       "character_tag": "stelle (honkai: star rail)",
       "series_tag": "honkai: star rail",
       "identity_id": "char_200c73158105"
+    },
+    "開拓者星": {
+      "character_tag": "stelle (honkai: star rail)",
+      "series_tag": "honkai: star rail",
+      "identity_id": "char_200c73158105",
+      "mapping_note": "使用者常用稱呼的別名；不另設單字「星」，避免與星期日等名稱誤判。"
     },
     "開拓者(同諧)星": {
       "character_tag": "stelle (honkai: star rail)",

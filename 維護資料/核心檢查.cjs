@@ -14,8 +14,9 @@ const c=json('characters.json'),p=json('pipeline.json');
 const results=[];
 function check(name,ok,detail=''){results.push({name,status:ok?'passed':'failed',detail});}
 function skip(name,detail){results.push({name,status:'skipped',detail});}
-check('角色與管線版本符合本次修改範圍',c._meta.version==='0.2.3'&&p._meta.version==='0.2.2');
-check('53 項映射保留',Object.keys(c.character_name_zh_to_tag).length===53);
+check('角色與管線版本符合本次修改範圍',c._meta.version==='0.2.4'&&p._meta.version==='0.2.2');
+check('54 項映射保留（原 53 項＋開拓者星）',Object.keys(c.character_name_zh_to_tag).length===54);
+check('開拓者星別名與開拓者(女)星同身份同 tag',c.character_name_zh_to_tag['開拓者星']?.identity_id===c.character_name_zh_to_tag['開拓者(女)星'].identity_id&&c.character_name_zh_to_tag['開拓者星']?.character_tag===c.character_name_zh_to_tag['開拓者(女)星'].character_tag);
 const old=json('維護資料/原版封存/characters.json').character_name_zh_to_tag;
 check('原角色與系列 tag 未改',Object.entries(old).every(([n,e])=>c.character_name_zh_to_tag[n]?.character_tag===e.character_tag&&c.character_name_zh_to_tag[n]?.series_tag===e.series_tag));
 const entries=Object.values(c.character_name_zh_to_tag);
@@ -66,7 +67,7 @@ if(originalAvailable) check('原始來源未修改',sources.files.every(x=>sha(f
 else skip('原始來源未修改','來源不在此電腦；僅上方封存雜湊檢查已執行');
 check('冒煙涵蓋全部critical',cases.cases.filter(x=>x.severity==='critical').every(x=>cases.smoke_case_ids.includes(x.id)));
 check('冒煙ID有效且唯一',new Set(cases.smoke_case_ids).size===cases.smoke_case_ids.length&&cases.smoke_case_ids.every(id=>cases.cases.some(x=>x.id===id)));
-const out={checked_at:new Date().toISOString(),version:'0.2.6',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
+const out={checked_at:new Date().toISOString(),version:'0.2.7',scope:'專案資料及結構；不代表LLM或成圖通過',passed:results.filter(r=>r.status==='passed').length,failed:results.filter(r=>r.status==='failed').length,skipped:results.filter(r=>r.status==='skipped').length,total:results.length,results,source_hashes:Object.fromEntries(names.map(n=>[n,sha(texts[n])])),project_sha256:sha(JSON.stringify(texts)),model_execution_status:modelLog.runs.length?'SEE_MODEL_LOG':'NOT_RUN'};
 fs.writeFileSync(path.join(root,'驗收',platform+'_靜態檢查結果.json'),JSON.stringify(out,null,2)+'\n','utf8');
 console.log(JSON.stringify({platform,passed:out.passed,failed:out.failed,skipped:out.skipped,total:out.total,model_execution_status:out.model_execution_status}));
 if(out.failed)process.exitCode=1;
