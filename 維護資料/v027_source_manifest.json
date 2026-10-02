@@ -1,0 +1,66 @@
+{
+  "version": "0.2.7",
+  "basis": "使用者核准畫面構成修訂（2026-10-02）：採用 P1–P4、P6、P7，P5 選 A；依據 FLAT-20261002 與 FLAT2-20261002 兩題對照；characters.json 0.2.4 新增開拓者星；測試案例 92；pipeline.json 未改",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "d1e1799d92ce43f6940fd3791a848a55d5772ea0946576f848dc3dad53006a34"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "cddc70ffd95aebfd9b3a34f648c32842dffedd0dc2b6db5fb09f6a2c903bb28a"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "449a38586e058ee0d9b1dc08990c336eb70707151bb7bd5ff83d996352dda9f8"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "9d4d4cb9c7c2a6113db4b4c39b29841a4f00b3cf26f8388983435d8421ae4363"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "fecbddeb886085ec105dd4b785599c6c605447cb518a3415bc3a415dfc879c36"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "192565062fdaf0987b7ce23db8b063dc338c27c760fee1860b70da9aacc53d9c"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "45630221de9e9e8677c986df3d152ab01bbf784dee6c480dbcdeab27fdc8da17"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "52d39d0c2931287e28058597ee3d9f72150f5652df5c87b34615080f62cf8520"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "0a92d8c587f698a8b7d0dd53a319d139ca602577d1097d460c032bc0f3e720c2"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "148aa322239b10005eef88d7fe30bb1004796c7989a0b67a2486c54957be330d"
+    },
+    {
+      "name": "README.md",
+      "sha256": "3855b321e01d83c23a865130d6652dbce6a2818fee0fa21d4648e1431a1f526d"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-# ANIMA 證據索引 v0.2.6
+# ANIMA 證據索引 v0.2.7
 
 本檔供維護與測試，不常駐於模型執行提示，不覆寫 directing.md。v0.1.3 的完整原文、提示片段與種子紀錄保存在「維護資料/原版封存/observations.md」。封存中的命令、已驗證標記與建議不是新版本的生效規則。
 
@@ -254,6 +254,54 @@ K3 未沿用 K2 的偏右擺位，因為與 K1 靠在左側窗框衝突；刪除
 
 決策：未達跨題目採用門檻，不修改 directing.md；作為「維護資料/草案/v0.2.7_畫面構成修訂草案.md」中 P2、P4、P5、P7 的證據來源。
 
+## FLAT2-20261002｜第二題：卡芙卡、夜晚陽台（P2、P4、P7 跨題目對照）
+
+問題：FLAT-20261002 的結論只有單一題目。換角色、換場景後，姿勢類型與鏡頭是否仍有效；另以只差鞋子一個變因，重測「裁切外的服裝」。
+
+### 條件
+
+與 FLAT-20261002 相同（模型、LoRA、工作流、參數、負向、觸發詞），12 張的實際執行圖在排除提示詞與種子後完全一致，且與 FLAT-20261002 的執行圖相同。圖片：使用者本機 E:\output\2026-10-02-205926 至 210621。服裝改為大衣、襯衫、長褲，避開 safe 下的裙襬問題，也讓鞋子成為 K 與 K＋鞋之間唯一的差別。
+
+C 正向：
+
+```text
+masterpiece, best quality, score_7, safe, 1girl, kafka \(honkai: star rail\), honkai: star rail, high contrast, long black coat, white shirt, black trousers, black high-heeled boots, night balcony, metal railing, city lights in the distance, cool blue night air, warm light spilling from the room behind her, standing with her weight on one leg, hands clasped behind her back, slight smile, looking at viewer, three-quarter view, full body
+```
+
+| 組 | 相對 C 的變動 |
+|---|---|
+| K | 刪 `black high-heeled boots`；姿勢改為 `leaning forward with both forearms resting on the railing, looking out over the city, calm expression, the city lights glowing on her face`；鏡頭改為 `three-quarter view, from above, cowboy shot` |
+| K＋鞋 | 與 K 相同，只加回 `black high-heeled boots` |
+
+### 結果
+
+判讀：使用者回報 C 四張差不多、s4 較好看；K 比 C 有情境感。執行與否為助手逐張目視，鞋子項目與使用者的「只有一張有鞋」一致。
+
+| 項目 | C | K | K＋鞋 |
+|---|---|---|---|
+| 趴在欄杆上 | — | 4/4 | 4/4 |
+| 俯視、cowboy shot | — | 4/4 | 4/4 |
+| 看向城市 | — | 0/4（看觀者） | 0/4（看觀者） |
+| 鞋子被塞進畫面邊角 | — | 0/4 | 1/4（s1） |
+| 鞋子改成過膝靴以進入畫面 | — | 0/4 | 1–2/4（s3 明顯，s4 疑似） |
+| 黑色長褲 | 0/4 | 0/4 | 0/4 |
+
+所有 12 張都是卡芙卡原裝的短褲加褲襪，指定的 black trousers 未被執行。
+
+### 判讀邊界
+
+可支持（連同 FLAT-20261002，兩種題目、每題每組 4 種子）：
+
+1. 同一場景下改姿勢類型與鏡頭，兩題都被執行，且使用者兩題都判斷較不平。
+2. 指定視線目標：GAZE-20261002 一組、FLAT-20261002 兩組、本題兩組，共五組嘗試均未看向目標。
+3. 裁切外仍寫鞋子時會出現異常（本題為單一變動：塞進邊角 1/4、改款 1–2/4；不寫鞋時 0/4）。
+
+不能支持：其他畫風 LoRA 或非站姿題材是否相同；「平」仍是整體印象，沒有評分量表。
+
+附帶觀察（不提案）：已知角色換裝時，與原裝衝突的單品（長褲對原裝短褲）12/12 被原裝蓋過。成因與普遍性未知，另行測試前不寫入規則。
+
+決策：FLAT-20261002 與本題共同達到本檔的採用門檻；v0.2.7 依此採用 P2、P4、P7。
+
 ## v0.2.3 維護註記
 
 本版更新文件版本並納入現行來源清單，未新增或重跑成圖證據。CAMERA-20260909 仍是使用者回報，適用限制不變。
@@ -281,3 +329,19 @@ K3 未沿用 K2 的偏右擺位，因為與 K1 靠在左側窗框衝突；刪除
 未驗證（V-008）：是否降低皮膚光澤、是否影響整體質感；另需注意與使用者明示的 wet、sweat、oiled 等濕潤描述可能互相抵消。建議測法：以 WAIST-20260926 的 C0 同種子 1–4，只改負向，成對比較。
 
 後續：2026-09-27 已依此測法實測，結果見 SHINY-20260927。
+
+## v0.2.7 維護註記｜畫面構成修訂
+
+依 FLAT-20261002 與 FLAT2-20261002（兩種題目）以及 GAZE-20261002、PROPOSAL-20261002，採用「維護資料/草案/v0.2.7_畫面構成修訂草案.md」的 P1–P4、P6、P7；P5 由使用者選擇 A（無場景資訊時用單純背景）。
+
+| 項目 | 寫入位置 | 證據等級 |
+|---|---|---|
+| P1 畫面方向提案 | D01、D04-S、D05、D07、D08 | 新功能；模型遵規未測（T81–T85、T89） |
+| P2 白話構圖回饋 | D04 | 兩題對照：姿勢類型與鏡頭有效，只換背景無效 |
+| P3 safe 構圖疊加 | D04 審美預設、D08 | 單題使用者回報，寫成提醒 |
+| P4 設計重心、視線目標 | D04 | 兩題對照；指定視線目標五組皆未執行 |
+| P5 背景 | D04 補完範圍 | 使用者決定（A） |
+| P6 開拓者星 | characters.json | 資料 |
+| P7 裁切外不寫服裝 | D06、D08 | 兩題對照，第二題為單一變動 |
+
+以上皆未經模型遵規實跑（模型測試紀錄仍為 NOT_RUN），也不保證美感。「已知角色換裝被原裝蓋過」只記錄於 FLAT2-20261002，未寫入規則。
