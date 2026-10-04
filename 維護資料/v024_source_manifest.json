@@ -1,0 +1,66 @@
+{
+  "version": "0.2.4",
+  "basis": "使用者核准服裝規劃、三套中文提案與白話局部調整；角色、管線與封存維持原樣",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "cece608b9fbe22c879519b4aed583840501c953e95b59d2ed267960835c5a935"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "5f46b459c9d80dc966193e45791974ec0958c84e9f30a7bb386aa54dc580bc82"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "7ee484dd184377a4685efd8b383ef9656186612653694e0440db2c7c7c4af820"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "5f83ffd18afc46ee2d9ed80d97396f866db7fbb875bb1f7ceb326fbb002c1a43"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "aba55317770406be8d84f7930deb0ad91d114a8351738bf62955b5326c94e268"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "5fbfd5ea8c234dd819c4b6b85f4b8a0316299cfd81e6eb7cec56c9b1f515dd41"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "e7b2387f5c847f42fd7c3f660e3e5e2654f0557495d9ec2e23f6980e22805521"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "9ea7116a351c9369681b26d7f75536a2fbb80b821a139529cdc7f66e84da5248"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "8a3c8c41f0c992f2118ab54e05a10f8f79d5aba741be327bbe5f6eb528a772d8"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "965f66aa5b39b6dcb3bf0ef237707b3c4017b478f0b17f36e1c059abad6aa72b"
+    },
+    {
+      "name": "README.md",
+      "sha256": "500c4e8cac55797a08fc431861907d3eb04f4632b20fa12efee1dc0034714542"
+    }
+  ]
+}

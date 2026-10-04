@@ -1,0 +1,23 @@
+{
+  "source": "D:/下載/ANIMA_Compiler_v0.2.0",
+  "shared_version": "0.2.0",
+  "adapter_version": "0.2.1",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "8f4aff511b7693d2ac91a888e05145898845101f4b60d2e29e9242b5cdf67e82"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "025559fb07bafd128af39d811835c14025d13bb39d02962846398872bc0742f6"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "b3358f654e1845f0422bcb920d03dce8a75032fb66799c281d65f113c47a5ed1"
+    }
+  ]
+}

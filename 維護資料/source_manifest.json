@@ -1,0 +1,31 @@
+{
+  "source": "D:/下載/新版ANIMA_Compiler_v0.1版本",
+  "checked_at": "2026-09-05T04:07:34.213Z",
+  "files": [
+    {
+      "name": "00_系統提示.md",
+      "sha256": "3e2abef912c073c1c1524cbc209f3dd07bc05394789900aa82a94fa4edfa9dfe",
+      "bytes": 16679
+    },
+    {
+      "name": "directing.md",
+      "sha256": "0a1eedd1c21243bcfafe2dc3f1bdf382cfe9904122ef963413d32037f78542ff",
+      "bytes": 33427
+    },
+    {
+      "name": "characters.json",
+      "sha256": "f65b8ed15290a6a7ea4e7f9a2552190f6518265e7deef83524c1e74154714697",
+      "bytes": 13434
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "43fb65196838682a47efe8429246378b69547739bf657fb152fce5ec999d459e",
+      "bytes": 15343
+    },
+    {
+      "name": "observations.md",
+      "sha256": "eb0e644b02dbac15c63f035501e549ccdc3e65d742a94946de4b95b4c34ab2a2",
+      "bytes": 30779
+    }
+  ]
+}

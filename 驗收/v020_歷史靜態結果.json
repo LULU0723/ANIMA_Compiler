@@ -1,0 +1,157 @@
+{
+  "checked_at": "2026-09-05T04:15:58.236Z",
+  "scope": "結構、資料保留、衍生檔與本機來源一致性；不代表 LLM 行為或 GPU 成像通過。",
+  "passed": 28,
+  "total": 28,
+  "results": [
+    {
+      "name": "完整載入版與來源逐字一致",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "兩份 JSON 版本一致",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "53 項映射保留",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "原角色與系列 tag 未改",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "每項有身份與非空 tag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "44 個身份未意外合併",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "身份限制無懸空引用",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "三月七變體共用身份限制且保留變體 tag",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "正規化後無跨身份碰撞",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "全形巡獵名稱可命中",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "大黑塔與黑天鵝未合併",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "watch 四項均不捏造原因",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "固定 prefix 未改",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "固定負向未改",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "prefix 有且只有一個 rating 槽",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "rating 模式資料完整",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "非成人模式不常駐 adult",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "CLIP→LoRA→正負編碼鏈有快照支持",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "主模型與 LoRA 未改",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "尺寸及取樣參數未改",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "快照負向依詞序與契約相符",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "FaceDetailer 狀態一致",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "完整載入版排除舊提示快照與維護歷史",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "D01–D08 各有唯一主章節",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "測試 ID 唯一且有輸入與判準",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "模型紀錄狀態有結果支持",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "封存原檔雜湊一致",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "原始來源未修改（可存取時）",
+      "pass": true,
+      "detail": "本機已確認"
+    }
+  ],
+  "source_hashes": {
+    "00_系統提示.md": "743d0fd83d528ad2b026173fed737c32ab588a61a97e13ddc0a7fca96ce8fbbb",
+    "directing.md": "8f4aff511b7693d2ac91a888e05145898845101f4b60d2e29e9242b5cdf67e82",
+    "characters.json": "025559fb07bafd128af39d811835c14025d13bb39d02962846398872bc0742f6",
+    "pipeline.json": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
+  },
+  "runtime_sha256": "c372cacb0f3d5a3e70fe838c3853bd56f7032308af5eeed502d53f1e06e51959",
+  "runtime_characters": 19693,
+  "model_execution_status": "NOT_RUN"
+}

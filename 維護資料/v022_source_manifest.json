@@ -1,0 +1,34 @@
+{
+  "version": "0.2.2",
+  "basis": "v0.2.1 camera 修訂 + 使用者核准五項修改",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "0e9ce2f042ee8ad1ce3cec447fd4617d9fd1c177d699ebbc77d00e2f7c122d5b"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "025559fb07bafd128af39d811835c14025d13bb39d02962846398872bc0742f6"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "43d542e042513f6fd81f4d0b5fe8429b6cc2295642c93ad5cca96167a287b774"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "798e0ff117b5314b6089effcb5fca8dcf91507f16cc6346ac161417382193531"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "b5b1cb1de3957ae867bd70869a5cafe1f7f79d8a5ea9e7d51a0486b23698e630"
+    }
+  ]
+}
