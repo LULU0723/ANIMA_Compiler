@@ -302,6 +302,56 @@ masterpiece, best quality, score_7, safe, 1girl, kafka \(honkai: star rail\), ho
 
 決策：FLAT-20261002 與本題共同達到本檔的採用門檻；v0.2.7 依此採用 P2、P4、P7。
 
+## LORA-20261005｜LoRA 在 MiaoMiao 1.4 上的實際影響
+
+問題：一、Aesthetic Quality Modifiers - Masterpiece LoRA 是否提升畫質；二、使用者覺得畫師 LoRA 在 MiaoMiao 上效果不明顯，是否屬實。
+
+共同條件：AnimaAdvancedV9 喵喵、30 步、Euler a、normal、CFG 5、種子 1–4。圖片在使用者本機 E:\output。所有判讀為助手目視，另附像素差（以同組換種子的差為尺度）；像素差會同時計入構圖與細節的隨機變化，不能代表畫風改變。
+
+### A｜Masterpiece LoRA 強度 0／0.5／1.0
+
+- LoRA：anima-base-1-masterpiece-v51（motimalu，v5.1 [anima-base-1]，sha256 b330b46df1c71e4409d7b60ecf45df4ee26310fa914c398226c7800cc2912936）。官方說明：以作者手動評為 masterpiece 的 386 張圖訓練於 Anima Base 1.0，觸發詞 masterpiece、very aesthetic。
+- 其他 LoRA 固定：今沢imazawa 0.2、alterkyon 0.7。模型 miaomiaoHarem_anima14，1024×1536。
+- 提示詞：使用者當時正在畫的同一段提示詞（白髮、角、紫色眼睛背景的暗色半身像），三組相同；觸發詞開關不變，強度 0 時觸發詞仍會送出，所以三組文字相同，唯一差別是 LoRA 權重。
+- 圖片：2026-10-05-011310 至 011932，共 12 張。
+
+| 比較 | 像素差 s1／s2／s3／s4 | 相對換種子（60.6） |
+|---|---|---|
+| 0 → 0.5 | 27.0／42.1／40.7／31.3 | 約 58% |
+| 0 → 1.0 | 37.9／55.1／48.5／46.8 | 約 78% |
+
+目視：構圖、姿勢、整體色調與背景主題 4/4 保留；服裝裝飾、背景元素、髮型細節改變。找不到強度 1.0 固定較好的面向（線條、光影、臉、錯誤數）。可支持：在本題上它的改變量大於前綴品質詞（參考前綴 A/B 測試約 42–60%），但沒有可辨識的品質方向。使用者尚未表示偏好。
+
+附帶：使用此 LoRA 時，觸發詞會接在最前面，正向變成 `style_imazawa, masterpiece, very aesthetic, masterpiece, best quality, ...`，masterpiece 重複，v0.2.5 移除的 very aesthetic 也被加回。
+
+### B｜alterkyon 在 MiaoMiao 1.4 與 Anima Aesthetic V11 上的差別
+
+- LoRA：(anima)(繪師)alterkyon，版本 1.0-anima（sha256 3ccbc78df82459c18f7be3f79358d2b01363debe78275013b2b200304313714e），檔案內嵌資料顯示訓練於 anima-base-v1.0，無觸發詞。只開這一個 LoRA，關閉組為未啟用。
+- 模型：miaomiaoHarem_anima14（sha256 9542fdd6db4f579b276a3fa6e26955e7e377a42ba65efd237dcda0b14e044d1b）與 anima_aestheticV11（sha256 3c1868387a3a1ff504bbb87c33678321965ead381fcf87afbd0264daa600c082）。
+- 依官方對 Aesthetic 版的建議，16 張正向與負向都不含 score 標籤。
+- 圖片：2026-10-05-012843 至 013711，共 16 張。
+
+正向：
+
+```text
+masterpiece, best quality, safe, 1girl, high contrast, long brown hair, brown eyes, white blouse, simple background, light grey background, soft light from the side, upper body, looking at viewer, slight smile
+```
+
+| 模型 | 關 → 1.0 像素差 s1／s2／s3／s4 | 相對換種子 | 目視 |
+|---|---|---|---|
+| MiaoMiao 1.4 | 54.1／31.4／34.3／35.2 | 約 80% | 4/4 主要改臉：眼睛變細、半瞇、側眼；光影、上色、白皙膚色不變 |
+| Aesthetic V11 | 38.1／36.7／43.0／38.1 | 約 82% | 整體畫風改變：頭髮變直變淺、陰影變平；膚色變深 2/4（s3、s4） |
+
+判讀：像素差兩邊相近，無法區分畫風與隨機細節。目視上，同一個 LoRA 在 MiaoMiao 只改臉部特徵、模型本身的畫法保留；在 Aesthetic 改變整體畫風。使用者判斷「喵喵的 LoRA 影響沒有底模或美學版明顯」，與本題目視一致。
+
+推測（未驗證）：MiaoMiao 作者官方前綴含 fair skin，模型可能強烈偏好白皙膚色，因此把 LoRA 帶來的膚色改變壓回。
+
+### 判讀邊界
+
+- 只測一個畫師 LoRA、一段提示詞、每組 4 種子；畫風判讀為單一判讀者目視。
+- 使用者提到的 Anima 底模本次未跑，「底模也較明顯」僅為使用者先前經驗。
+- 不是編譯規則；記錄作為 LoRA 選用與配方測試的參考，不修改 directing.md 或 pipeline.json。
+
 ## v0.2.3 維護註記
 
 本版更新文件版本並納入現行來源清單，未新增或重跑成圖證據。CAMERA-20260909 仍是使用者回報，適用限制不變。
