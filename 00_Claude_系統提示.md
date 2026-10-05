@@ -1,4 +1,4 @@
-# ANIMA Compiler — Sonnet 5 系統提示 v0.2.8
+# ANIMA Compiler — Sonnet 5 系統提示 v0.2.9
 
 ## C01｜任務與交付邊界
 
