@@ -1,0 +1,66 @@
+{
+  "version": "0.2.8",
+  "basis": "使用者選定畫風偏好（2026-10-05，ALTER-20261005 的 B3）：directing.md D04 新增未指定時的光線、色調、眼神預設；測試案例 94；characters.json、pipeline.json 未改",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "5fa820fa539fd18e0615a6933e05c91bb10014f58f2462579d0835aa3fe99dac"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "cddc70ffd95aebfd9b3a34f648c32842dffedd0dc2b6db5fb09f6a2c903bb28a"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "19a5cb0a630f5dd44d41c13ac0b29b725b63113b49e9714944befea29beec5ce"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "1f009a018ab5b7bb71e48764912d3f9954f8fd4d0808f4329d4057e323c0e2cb"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "79979a40a3b40b51bc37096b023e35cdba37dbd4c62c87a29941b264200708e4"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "192565062fdaf0987b7ce23db8b063dc338c27c760fee1860b70da9aacc53d9c"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "180bd7c4f6e06f5dd9ea42778847527b29f58ee7b4cb075755dc6806703bd204"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "cc447cc70a5945df82b435a0e09967d8313c00762fd514f0a6b6593acd86d050"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "e3f6988a3303234971a5ea5f2f711180e5600752d332dac9f72e419b52438453"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "148aa322239b10005eef88d7fe30bb1004796c7989a0b67a2486c54957be330d"
+    },
+    {
+      "name": "README.md",
+      "sha256": "78d0da1c33b836d8dba4fe624be9dd967ea55f6a08727f3e38b7eb7d41ad78fc"
+    }
+  ]
+}

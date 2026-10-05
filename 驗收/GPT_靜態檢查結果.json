@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-10-04T17:44:22.677Z",
-  "version": "0.2.7",
+  "checked_at": "2026-10-05T12:31:06.280Z",
+  "version": "0.2.8",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
   "passed": 33,
   "failed": 0,
@@ -179,11 +179,11 @@
     }
   ],
   "source_hashes": {
-    "00_GPT_系統提示.md": "9e2f005ca620748ac5c22c4b6ccc4d0c773930e03caed4f324e597f9fd1090f4",
-    "directing.md": "d1e1799d92ce43f6940fd3791a848a55d5772ea0946576f848dc3dad53006a34",
+    "00_GPT_系統提示.md": "bf697e2f8b1a4129b30b15566fae6d6f9e7d6a5d4a7e2612e29de157c58da27d",
+    "directing.md": "5fa820fa539fd18e0615a6933e05c91bb10014f58f2462579d0835aa3fe99dac",
     "characters.json": "cddc70ffd95aebfd9b3a34f648c32842dffedd0dc2b6db5fb09f6a2c903bb28a",
     "pipeline.json": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
   },
-  "project_sha256": "13c64acd3faa93b3dd1b79816a6c1127003bc012cc94575349f5a00316db529c",
+  "project_sha256": "b244753484ce3cb0144c1b370377eb027242caa5aa98328fff01727f9ab538a9",
   "model_execution_status": "NOT_RUN"
 }
