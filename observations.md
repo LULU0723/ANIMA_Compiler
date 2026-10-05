@@ -1,4 +1,4 @@
-# ANIMA 證據索引 v0.2.7
+# ANIMA 證據索引 v0.2.8
 
 本檔供維護與測試，不常駐於模型執行提示，不覆寫 directing.md。v0.1.3 的完整原文、提示片段與種子紀錄保存在「維護資料/原版封存/observations.md」。封存中的命令、已驗證標記與建議不是新版本的生效規則。
 
@@ -352,6 +352,60 @@ masterpiece, best quality, safe, 1girl, high contrast, long brown hair, brown ey
 - 使用者提到的 Anima 底模本次未跑，「底模也較明顯」僅為使用者先前經驗。
 - 不是編譯規則；記錄作為 LoRA 選用與配方測試的參考，不修改 directing.md 或 pipeline.json。
 
+## ALTER-20261005｜在 MiaoMiao 上做出 alterkyon 風格：畫師 LoRA 與文字描述
+
+問題：使用者喜歡畫師 alterkyon 的眼睛、上色與線條感，但不想直接使用模仿特定畫師的 LoRA。比較兩個 alter LoRA 與不同強度的文字描述，在 MiaoMiao 1.4 上能否做出這些特徵。
+
+### 條件
+
+miaomiaoHarem_anima14（sha256 9542fdd6db4f579b276a3fa6e26955e7e377a42ba65efd237dcda0b14e044d1b）、AnimaAdvancedV9 喵喵、30 步、Euler a、normal、CFG 5、1024×1536、種子 1–4。除各組指定的 LoRA 外，其他 LoRA 全部關閉。圖片在使用者本機 E:\output\2026-10-05-193809 至 202310。
+
+A 正向（C、D 組同樣使用，D 組另有觸發詞 @altani 自動接在最前面）：
+
+```text
+masterpiece, best quality, score_7, safe, 1girl, high contrast, long dark red hair, red eyes, black sleeveless turtleneck dress, indoors, window behind her, warm afternoon light, sitting on a wooden chair, hands resting on her lap, slight smile, looking at viewer, cowboy shot
+```
+
+| 組 | LoRA | 相對 A 的文字變動 | 負向 shiny skin |
+|---|---|---|---|
+| A | 無 | — | 有 |
+| C | alterkyon 1.0-anima 0.7（sha256 3ccbc78d…714e） | — | 有 |
+| D 0.7 | Alterkyon Style v5.0（sha256 9f19aa8a2f8db8bf8839e4f81636aad321cc50574945864a6ac2c1c9078499de）0.7 | — | 有 |
+| D 1.0 | 同上 1.0 | — | s1、s2 無；s3、s4 有（執行中途被加回，條件不一致） |
+| B | 無 | 加 shiny skin、strong warm backlight、deep warm brown shadows、the room behind her falling into dim brown shade、glossy highlights on her shoulders and arms、half-closed eyes、heavy-lidded sleepy gaze | 無 |
+| B2 | 無 | 加 warm backlight from the window、warm brown shadows、soft glossy highlights on her shoulders、half-closed eyes | 無 |
+| B3 | 無 | 加 warm backlight from the window、warm brown shadows、half-closed eyes | 有 |
+
+### 結果
+
+判讀：明暗以整張平均亮度量測（0–255）；眼睛、光澤為助手目視。使用者判斷：B「矯枉過正」，最後選定 B3。
+
+| 組 | 平均亮度 | 眼睛 | 暖色、強明暗 | 皮膚光澤 |
+|---|---|---|---|---|
+| A | 108 | 睜開 | 暖光但偏亮 | 霧面 |
+| C | 108 | 輕微笑瞇 | 無變化 | 霧面 |
+| D 0.7 | 109 | 2/4 稍細長 | 無變化 | 霧面 |
+| D 1.0 | 108 | 比 0.7 再細長 | 無變化 | 霧面（含負向未壓光澤的 s1、s2） |
+| B3 | 93 | 半瞇 4/4 | 有 | 霧面 |
+| B2 | 100 | 半瞇 4/4 | 有 | 肩臂高光 4/4，洋裝也帶光澤 |
+| B | 74 | 半瞇但多為往下看 | 過暗 | 全身油亮 |
+
+- 兩個 alter LoRA 在 MiaoMiao 上都沒有改變明暗，也沒有帶出光澤；強度 1.0 也一樣（與 LORA-20261005 一致）。
+- 文字描述從 B3、B2 到 B 呈現連續的強度梯度。B 過頭來自同一特徵寫了兩三次並加強詞（strong、deep、heavy-lidded）。
+- **D 1.0 有 2/4（s1 右下、s3 左下）畫出畫師簽名「ALTANI」與帳號字樣**，負向的 artist name 沒有擋住；D 0.7 四張角落未見簽名。
+
+### 參考
+
+alterkyon 的特徵依 Alterkyon v1.0-anima 在 Civitai 上一張 PG-13 範例圖（LoRA 生成，非畫師原作）與 LORA-20261005 的 Aesthetic 版結果整理：半瞇慵懶的眼神、暖色強明暗與咖啡色陰影、皮膚高光、偏細的深色輪廓線。Danbooru 擋下程式存取，未取得畫師資料；其他較露骨的範例圖未檢視。
+
+### 判讀邊界
+
+- 單一題目（窗邊逆光）、單一原創角色、每組 4 種子；D 1.0 的光澤項只有 2 張是完整條件。
+- B3 的寫法在其他光源與場景下的效果未驗證。
+- 簽名只檢查到畫面四角與目視可見處。
+
+決策：v0.2.8 依使用者選擇，把 B3 的三項寫法列為「未指定時的畫風偏好」（directing.md D04）。這是使用者偏好，不是跨題目驗證過的效果規則；使用者明示的光線、色調、表情優先。Alterkyon v5.0 若使用，強度不超過 0.7 並檢查畫面是否出現簽名（工作流操作，不寫入編譯規則）。
+
 ## v0.2.3 維護註記
 
 本版更新文件版本並納入現行來源清單，未新增或重跑成圖證據。CAMERA-20260909 仍是使用者回報，適用限制不變。
@@ -395,3 +449,7 @@ masterpiece, best quality, safe, 1girl, high contrast, long brown hair, brown ey
 | P7 裁切外不寫服裝 | D06、D08 | 兩題對照，第二題為單一變動 |
 
 以上皆未經模型遵規實跑（模型測試紀錄仍為 NOT_RUN），也不保證美感。「已知角色換裝被原裝蓋過」只記錄於 FLAT2-20261002，未寫入規則。
+
+## v0.2.8 維護註記｜畫風偏好
+
+依 ALTER-20261005 使用者選定的 B3，directing.md D04 新增「畫風偏好」：未指定光線、色調、表情時，預設寫暖色逆光（有光源寫出來源）、warm brown shadows、half-closed eyes，各寫一次；明示時以使用者為準。原「既有 LoRA 負責預設風格」改為「除畫風偏好外不自行增加畫風詞」，因為 LORA-20261005 與 ALTER-20261005 顯示畫師 LoRA 在 MiaoMiao 上主要只改臉部。新增 T93、T94。這是使用者偏好，不是跨題目驗證的效果規則；模型遵規仍 NOT_RUN。

@@ -1,5 +1,5 @@
 {
-  "version": "0.2.7",
+  "version": "0.2.8",
   "model_execution_status": "NOT_RUN",
   "method": "每案在新的專案對話載入對應00入口及 directing.md、characters.json、pipeline.json；turns依序送出。不要提供預期答案給受測模型。收錄完整回覆與工具活動；各模型建議三次重跑。",
   "cases": [
@@ -1581,10 +1581,45 @@
         "新增物件 0"
       ],
       "severity": "required"
+    },
+    {
+      "id": "T93",
+      "name": "未指定時套用畫風偏好",
+      "turns": [
+        "原創成年女性，咖啡廳窗邊，坐著"
+      ],
+      "rules": [
+        "D04",
+        "D08"
+      ],
+      "assertions": [
+        "有暖色逆光並寫出窗戶光源",
+        "有 warm brown shadows",
+        "有 half-closed eyes",
+        "每項只出現一次，無 strong、deep 等加強詞",
+        "正向不含 shiny skin 或 glossy"
+      ],
+      "severity": "required"
+    },
+    {
+      "id": "T94",
+      "name": "明示時不套用畫風偏好",
+      "turns": [
+        "原創成年女性，夜晚街道，冷色月光，驚訝地睜大眼睛"
+      ],
+      "rules": [
+        "D01",
+        "D04"
+      ],
+      "assertions": [
+        "保留冷色月光與驚訝睜眼",
+        "不出現 warm backlight、warm brown shadows、half-closed eyes"
+      ],
+      "severity": "required"
     }
   ],
-  "adapter_version": "0.2.7",
-  "behavior_version": "0.2.7",
+  "adapter_version": "0.2.8",
+  "behavior_version": "0.2.8",
   "smoke_case_ids": [
     "T21",
     "T22",
