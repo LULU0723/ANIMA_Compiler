@@ -1,5 +1,5 @@
 {
-  "version": "0.2.10",
+  "version": "0.2.11",
   "model_execution_status": "PARTIAL_RUN",
   "method": "每案在新的專案對話載入對應00入口及 directing.md、characters.json、pipeline.json；turns依序送出。不要提供預期答案給受測模型。收錄完整回覆與工具活動；各模型建議三次重跑。",
   "cases": [
@@ -1583,8 +1583,8 @@
       "severity": "required"
     }
   ],
-  "adapter_version": "0.2.10",
-  "behavior_version": "0.2.10",
+  "adapter_version": "0.2.11",
+  "behavior_version": "0.2.11",
   "smoke_case_ids": [
     "T21",
     "T22",

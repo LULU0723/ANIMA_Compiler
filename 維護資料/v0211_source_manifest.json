@@ -1,0 +1,66 @@
+{
+  "version": "0.2.11",
+  "basis": "依 SMOKE-A-20261103 T22，使用者決定在入口共用規則 C01 補「純畫面描述也是編譯請求」（2026-11-03）；directing.md 只改版本號；characters.json、pipeline.json 未改",
+  "files": [
+    {
+      "name": "directing.md",
+      "sha256": "d1a205d89b8e66758c72a13c3cdcffceb395d5c21002b2323f42b0d73456cb19"
+    },
+    {
+      "name": "characters.json",
+      "sha256": "cddc70ffd95aebfd9b3a34f648c32842dffedd0dc2b6db5fb09f6a2c903bb28a"
+    },
+    {
+      "name": "pipeline.json",
+      "sha256": "bb72a0448321f7b52bc86214c5c12ebacffe7d834b038d26ca4374aa33f99954"
+    },
+    {
+      "name": "observations.md",
+      "sha256": "eae31a919196816c6e4abe58dbef8393f40234e3a508f4d68f82d80d9bf8e57d"
+    },
+    {
+      "name": "使用說明.md",
+      "sha256": "7faecf1ccc4b0ade9f4ee10b582b9a6a619fc23b0f12e8fd8cbd44505387ca67"
+    },
+    {
+      "name": "本次修訂說明.md",
+      "sha256": "8b0de3257a947d1e32ea5dec169bb241f4b4d53b4e340ed30e28a4c398584ac9"
+    },
+    {
+      "name": "維護資料/入口共用規則.md",
+      "sha256": "a6f8b45bea812a447579859e72430e2a4e236957ef771471de4ac3f47d5deaa1"
+    },
+    {
+      "name": "維護資料/GPT適配.md",
+      "sha256": "144c642034d3dd624b8156c53a4a598c488321bb98d239296d93e52a183d681f"
+    },
+    {
+      "name": "維護資料/Claude適配.md",
+      "sha256": "73818c2bbe52dd659e15107d69910e2f35dc9ef057ad999a2a921040bc15f19f"
+    },
+    {
+      "name": "維護資料/重建與檢查.cjs",
+      "sha256": "b84e54b7f6a8a83e28daa1686c579be605949d9786df3b75fc8276a84d75c001"
+    },
+    {
+      "name": "維護資料/核心檢查.cjs",
+      "sha256": "37a5b4a020fdba9faf788fa783fe79db4798dddf2937f436f4bccbd5c1e5095c"
+    },
+    {
+      "name": "驗收/模型測試案例.json",
+      "sha256": "3f898a8e5c6856e38b8076ffca67c136561b7e6e5a1d7bc82724b4207c17197c"
+    },
+    {
+      "name": "驗收/模型測試紀錄.json",
+      "sha256": "d0d0cca615a0a2ca90c6c8916a31b61234a01519738697b02b007266f9cedbc4"
+    },
+    {
+      "name": "驗收/平台新增驗收.md",
+      "sha256": "148aa322239b10005eef88d7fe30bb1004796c7989a0b67a2486c54957be330d"
+    },
+    {
+      "name": "README.md",
+      "sha256": "3017c0380e8555f524d531a98efcfc39f2d561e026a06551faeaf279a962cffe"
+    }
+  ]
+}
