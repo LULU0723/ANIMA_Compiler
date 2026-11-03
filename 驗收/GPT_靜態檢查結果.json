@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-10-05T12:39:28.844Z",
-  "version": "0.2.9",
+  "checked_at": "2026-11-03T14:57:52.100Z",
+  "version": "0.2.10",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
-  "passed": 33,
+  "passed": 37,
   "failed": 0,
-  "skipped": 1,
-  "total": 34,
+  "skipped": 0,
+  "total": 37,
   "results": [
     {
       "name": "角色與管線版本符合本次修改範圍",
@@ -118,27 +118,42 @@
       "detail": ""
     },
     {
-      "name": "CLIP→LoRA→正負編碼鏈有快照支持",
+      "name": "UNET／CLIP→LoRA→NegPip→正負編碼→取樣鏈有快照支持",
       "status": "passed",
       "detail": ""
     },
     {
-      "name": "主模型與 LoRA 未改",
+      "name": "括號跳脫節點位於正向編碼前",
       "status": "passed",
       "detail": ""
     },
     {
-      "name": "尺寸及取樣參數未改",
+      "name": "快照主模型為 MiaoMiao Harem 1.4 且 LoRA 有記錄",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "取樣參數與原版封存一致",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "快照尺寸記錄實際生效來源",
       "status": "passed",
       "detail": ""
     },
     {
       "name": "快照負向依詞序與契約相符",
-      "status": "skipped",
-      "detail": "快照早於 v0.2.1 契約，待使用者更新工作流並重新快照（V-007）"
+      "status": "passed",
+      "detail": ""
     },
     {
-      "name": "FaceDetailer 狀態一致",
+      "name": "修飾器預設狀態一致",
+      "status": "passed",
+      "detail": ""
+    },
+    {
+      "name": "已結案待驗證項皆附結論",
       "status": "passed",
       "detail": ""
     },
@@ -179,11 +194,11 @@
     }
   ],
   "source_hashes": {
-    "00_GPT_系統提示.md": "785f8f5d5f808b553c8b03c1fc4ceb01bf5f113740790dc2ee9cf6c430d187d1",
-    "directing.md": "7d5849e517d3ea3c740cae13899114c02c4902be2cfea70effe3b140720de4c7",
+    "00_GPT_系統提示.md": "95762b60e9f3c22923d8be6144f9019f42829ebd4f7722130728df997edcb8e1",
+    "directing.md": "26dc8e18f1834eefc3e1d610205cd2af1f86fd466c679455353f40914dde6146",
     "characters.json": "cddc70ffd95aebfd9b3a34f648c32842dffedd0dc2b6db5fb09f6a2c903bb28a",
-    "pipeline.json": "1587342b5bf812c87dec726fabfbfddf97ad6436dcb7a18d09bd09fad2191c3c"
+    "pipeline.json": "bb72a0448321f7b52bc86214c5c12ebacffe7d834b038d26ca4374aa33f99954"
   },
-  "project_sha256": "7ba6613b7ab258f8d96fa099a05da1483f5251dc8629b4b445f3f1db0aa13892",
+  "project_sha256": "aa0e448277ff44fc6010f99c0fe6e621cd1ad046f19be4e6f2f6396eea5fb077",
   "model_execution_status": "NOT_RUN"
 }

@@ -1,4 +1,4 @@
-# ANIMA 證據索引 v0.2.9
+# ANIMA 證據索引 v0.2.10
 
 本檔供維護與測試，不常駐於模型執行提示，不覆寫 directing.md。v0.1.3 的完整原文、提示片段與種子紀錄保存在「維護資料/原版封存/observations.md」。封存中的命令、已驗證標記與建議不是新版本的生效規則。
 
@@ -29,7 +29,7 @@
 | 3-1 ultra detailed | 既有 artifact 疑慮保留；v0.2.5 因不在官方品質／meta 標籤體系內而自 prefix 移除（同時移除 very aesthetic） | 移除依據是官方標籤體系，不是 artifact 因果已證明 |
 | 3-2 high contrast | 既有低對比衝突疑慮保留；v0.2.5 移出 prefix，改為角色／系列後的固定風格詞 | 仍固定輸出；與柔光的實際關係需對照 |
 | 4-1 角色辨識 | 卡芙卡／銀狼等回報較穩；翡翠、靈砂、昔漣、長夜月不穩 | 成因未知，不以日期或熱門度推測；角色仍是既有身份，不能偷偷改成原創 |
-| 4-2 LoRA | alterkyon 權重與構圖關係待測 | 同工作流、同種子只改 LoRA 權重 |
+| 4-2 LoRA | 部分回答：MiaoMiao 1.4 上 alterkyon 關→1.0 主要改臉部，光影、上色、膚色不變（LORA-20261005 B，上半身單純背景 4 種子）；兩個 alter LoRA 平均亮度不變（ALTER-20261005） | 只支持上半身單純背景題；0.5 等中間強度、全身或複雜構圖未測 |
 | 4-3 no X | 有使用紀錄，排除效果未驗證 | 可保留要求，不承諾消失 |
 | 4-4 adult | 身高／頭身比影響待測 | 非成人模式不常駐是沿用政策，不是已證明因果 |
 | 4-5 負向詞 | 八項保護詞沿用；v0.2.5 補官方建議 blurry、jpeg artifacts、chromatic aberration；v0.2.6 使用者決定加 shiny skin；使用者決定不加安全標籤 | blurry 等三項未測（V-006）；shiny skin 見 SHINY-20260927（V-008） |
@@ -457,3 +457,9 @@ alterkyon 的特徵依 Alterkyon v1.0-anima 在 Civitai 上一張 PG-13 範例�
 ## v0.2.9 維護註記｜撤回畫風偏好
 
 使用者判斷 v0.2.8 的預設畫風（暖色逆光、warm brown shadows、half-closed eyes）影響的畫面太多，決定撤回。directing.md 恢復為 v0.2.7 的內容，T93、T94 一併刪除（測試案例回到 92 案）。ALTER-20261005 的測試結果保留：畫師 LoRA 在 MiaoMiao 上主要只改臉部、文字描述可調整明暗與光澤、Alterkyon v5.0 強度 1.0 會畫出畫師簽名；其中「v0.2.8 採用 B3」的決策已由本註記撤回。需要這種風格時，由使用者在單次請求中明示。
+
+## v0.2.10 維護註記｜重新快照與待驗證項整理
+
+工作流快照改為使用者目前的主力 AnimaAdvancedV10 喵喵（pipeline.json → snapshot；舊的 CleanPipeline_v1 快照移到 維護資料/pipeline_history.json → superseded_snapshots）。新快照的負向與契約逐詞一致；工作流內建括號跳脫節點，與編譯器輸出的 \( \) 不衝突。實際出圖解析度由「寬度／高度」節點決定，為 1024×1536（EmptyLatentImage 欄位上的 920×1536 不生效）。
+
+待驗證項：V-001、V-002 依 efficiency-nodes 原始碼結案（只讀原始碼、未實跑，且新主力已不用該節點）；V-003 因快照更換結案；V-004 依 MiaoMiao Harem 1.4 作者官方模板視 score_7 為適用（未做成圖 A/B）；V-007 完成。V-005、V-006、V-008 不變。4-2 改為部分回答。directing.md、characters.json 與 prompt_contract 內容未改，模型遵規仍 NOT_RUN。

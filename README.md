@@ -12,7 +12,7 @@
 | 這版改了什麼 | `本次修訂說明.md` |
 | 編譯行為規則 D01–D08 | `directing.md` |
 | 角色映射、身份限制、年齡線索 | `characters.json` |
-| prefix / rating / 固定負向契約與工作流快照 | `pipeline.json` |
+| prefix / rating / 固定負向契約與工作流快照（目前為 AnimaAdvancedV10 喵喵） | `pipeline.json` |
 | 實測證據與各條的適用邊界 | `observations.md` |
 | 92 個待測案例與冒煙順序 | `驗收/模型測試案例.json` |
 
@@ -36,7 +36,7 @@ masterpiece, best quality, score_7, {rating},
 worst quality, low quality, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, chromatic aberration, bad hands, extra fingers, missing fingers, fused fingers, bad feet, extra toes, missing toes, fused toes, shiny skin
 ```
 
-前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用；`shiny skin` 為 v0.2.6 使用者決定加入；單題實測可去除濕亮反光，明示濕潤時會減弱光澤但保留汗珠（`observations.md` SHINY-20260927）。`score_*` 是否適用目前微調模型尚待確認（`pipeline.json` V-004）。
+前半段（到 `chromatic aberration`）依 Anima 官方建議；手腳防護詞為本專案沿用；`shiny skin` 為 v0.2.6 使用者決定加入；單題實測可去除濕亮反光，明示濕潤時會減弱光澤但保留汗珠（`observations.md` SHINY-20260927）。`score_7` 依 MiaoMiao Harem 1.4 作者官方模板視為適用（`pipeline.json` V-004；未做成圖 A/B）。
 
 ## 維護
 
@@ -50,7 +50,7 @@ node 維護資料/重建與檢查.cjs          # 重建衍生檔並執行檢查
 node 維護資料/重建與檢查.cjs --check  # 只檢查，不重建
 ```
 
-來源清單（`維護資料/v029_source_manifest.json`）不會自動更新，需人工審核變更後更新雜湊——這是刻意的，避免把意外修改自動認可。完整流程見 `使用說明.md` 的「維護」段。
+來源清單（`維護資料/v0210_source_manifest.json`）不會自動更新，需人工審核變更後更新雜湊——這是刻意的，避免把意外修改自動認可。完整流程見 `使用說明.md` 的「維護」段。
 
 ## 狀態
 
