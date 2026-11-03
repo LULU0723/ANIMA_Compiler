@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-03T14:57:52.338Z",
+  "checked_at": "2026-11-03T15:20:18.683Z",
   "version": "0.2.10",
   "scope": "專案資料及結構；不代表LLM或成圖通過",
   "passed": 37,
@@ -200,5 +200,5 @@
     "pipeline.json": "bb72a0448321f7b52bc86214c5c12ebacffe7d834b038d26ca4374aa33f99954"
   },
   "project_sha256": "d8c634f5ae6c450e769e760a86d17fb209fc765ba5f9d8b6654972627ab38dda",
-  "model_execution_status": "NOT_RUN"
+  "model_execution_status": "SEE_MODEL_LOG"
 }

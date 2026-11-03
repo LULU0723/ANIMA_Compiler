@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-03T14:57:52.356Z",
+  "checked_at": "2026-11-03T15:20:18.702Z",
   "version": "0.2.10",
   "passed": 9,
   "failed": 0,
@@ -57,5 +57,5 @@
       "detail": "未設定或無法存取外部來源；未執行，不計為通過"
     }
   ],
-  "model_execution_status": "NOT_RUN"
+  "model_execution_status": "PARTIAL_RUN"
 }

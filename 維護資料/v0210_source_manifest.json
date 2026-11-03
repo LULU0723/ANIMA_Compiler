@@ -1,6 +1,6 @@
 {
   "version": "0.2.10",
-  "basis": "重新快照與待驗證項整理（2026-11-03）：snapshot 改為 AnimaAdvancedV10 喵喵；V-001～V-004、V-007 結案；4-2 改為部分回答；directing.md、characters.json 與 prompt_contract 內容未改",
+  "basis": "重新快照與待驗證項整理（2026-11-03）：snapshot 改為 AnimaAdvancedV10 喵喵；V-001～V-004、V-007 結案；4-2 改為部分回答；directing.md、characters.json 與 prompt_contract 內容未改；2026-11-03 追加 GPT-5.6 冒煙 A 組實跑紀錄（SMOKE-A-20261103），規則未改",
   "files": [
     {
       "name": "directing.md",
@@ -16,11 +16,11 @@
     },
     {
       "name": "observations.md",
-      "sha256": "4d0684fe3affc9bb56e7541a4a9e3d7b30eabdb6f938398d178a5ff4c73e82f0"
+      "sha256": "6465169d36579093f9cc1969207281dd3316a5c1f406b8203dc83523150d5638"
     },
     {
       "name": "使用說明.md",
-      "sha256": "54befcb9d78346bd0cc75bb6b0500663be405b7dc3e935f6eca76e2ca3b36418"
+      "sha256": "ab64a0132d9ab0cddfba820ebdeae573e58f8966cade4b07762d33bb4a164b23"
     },
     {
       "name": "本次修訂說明.md",
@@ -40,7 +40,7 @@
     },
     {
       "name": "維護資料/重建與檢查.cjs",
-      "sha256": "03da1478413eb2f7a3fd380ccda170dd349cf1eebc32c933130afdaf5a36441b"
+      "sha256": "ea54667e30537b0fc30f10da4dc4b4657869d4169af9a964a5c55d7944f13317"
     },
     {
       "name": "維護資料/核心檢查.cjs",
@@ -48,11 +48,11 @@
     },
     {
       "name": "驗收/模型測試案例.json",
-      "sha256": "541681f0cce377adebc12f047aac8c442368cfbf8fe1aafa9496ceef79da5b04"
+      "sha256": "4a495ec1aa7b0924d518bbfd659844152283fbc48c5dd9fa85bdbcddcd412c52"
     },
     {
       "name": "驗收/模型測試紀錄.json",
-      "sha256": "82978a8e7e822e432957d0ee8ecbdd6a9ec42ae490e5720dda471a6d7893a7df"
+      "sha256": "d0d0cca615a0a2ca90c6c8916a31b61234a01519738697b02b007266f9cedbc4"
     },
     {
       "name": "驗收/平台新增驗收.md",
@@ -60,7 +60,7 @@
     },
     {
       "name": "README.md",
-      "sha256": "ce15e8021c3c9d68e4d50eca63bb84731072514c47e652f2520e65f5590956ec"
+      "sha256": "6b16d7a4606031699bc88d4356d6db0eb813ddb3f65890af8e0122243dea22d3"
     }
   ]
 }
