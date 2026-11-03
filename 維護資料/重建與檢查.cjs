@@ -17,7 +17,7 @@ for(const [platform,target] of [['GPT','GPT-5.6'],['Claude','Sonnet 5']]){
  check(platform+' 專案核心檢查',run.status===0);
 }
 const cases=JSON.parse(read('驗收/模型測試案例.json'));
-let doc='# 模型驗收案例 v0.2.10\n\n本檔由模型測試案例.json產生，不手改。使用專案模式：00入口及三份正式附件；完整載入版停止維護。\n\n狀態：NOT_RUN。測試時不要把判準提供給受測模型；逐輪保存回覆與工具活動。\n\n## 冒煙順序\n\n先跑全部critical，再跑其餘指定案例：\n\n'+cases.smoke_case_ids.join('、')+'\n\n## 全部案例\n';
+let doc='# 模型驗收案例 v0.2.10\n\n本檔由模型測試案例.json產生，不手改。使用專案模式：00入口及三份正式附件；完整載入版停止維護。\n\n狀態：'+cases.model_execution_status+'（逐案結果見 驗收/模型測試紀錄.json）。測試時不要把判準提供給受測模型；逐輪保存回覆與工具活動。\n\n## 冒煙順序\n\n先跑全部critical，再跑其餘指定案例：\n\n'+cases.smoke_case_ids.join('、')+'\n\n## 全部案例\n';
 for(const c of cases.cases){doc+='\n### '+c.id+' '+c.name+'（'+c.severity+'）\n\n';c.turns.forEach((t,i)=>{doc+='第'+(i+1)+'輪：'+t+'\n\n';});doc+='判準：\n\n'+c.assertions.map(x=>'- '+x).join('\n')+'\n';}
 const md='驗收/模型驗收案例.md';if(!checkOnly)fs.writeFileSync(path.join(root,md),doc,'utf8');
 check('案例及統一說明同步',cases.cases.length===92&&read(md)===doc);
@@ -26,5 +26,5 @@ check('正式來源與v0.2.10清單一致',manifest.files.every(f=>fs.existsSync
 check('證據檔納入清單',manifest.files.some(f=>f.name==='observations.md'));
 if(!manifest.source||!fs.existsSync(manifest.source))skip('外部來源包核對','未設定或無法存取外部來源；未執行，不計為通過');
 else check('外部來源包核對',manifest.files.every(f=>fs.existsSync(path.join(manifest.source,f.name))&&hash(path.join(manifest.source,f.name))===f.sha256));
-const out={checked_at:new Date().toISOString(),version:'0.2.10',passed:results.filter(x=>x.status==='passed').length,failed:results.filter(x=>x.status==='failed').length,skipped:results.filter(x=>x.status==='skipped').length,total:results.length,results,model_execution_status:'NOT_RUN'};
+const out={checked_at:new Date().toISOString(),version:'0.2.10',passed:results.filter(x=>x.status==='passed').length,failed:results.filter(x=>x.status==='failed').length,skipped:results.filter(x=>x.status==='skipped').length,total:results.length,results,model_execution_status:cases.model_execution_status};
 fs.writeFileSync(path.join(root,'驗收/平台入口檢查結果.json'),JSON.stringify(out,null,2)+'\n');console.log(JSON.stringify(out,null,2));if(out.failed)process.exitCode=1;
